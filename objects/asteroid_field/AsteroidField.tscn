@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/asteroid_field/AsteroidField.gd" type="Script" id=1]
+[ext_resource path="res://objects/asteroid_field/PlayerShip.tscn" type="PackedScene" id=2]
+
+[node name="AsteroidField" type="Node2D"]
+z_index = -4000
+script = ExtResource( 1 )
+
+[node name="PlayerShip" parent="." instance=ExtResource( 2 )]
+position = Vector2( 256, 256 )
+
+[node name="Timer_UpdateAsteroids" type="Timer" parent="."]
+autostart = true
+[connection signal="timeout" from="Timer_UpdateAsteroids" to="." method="_update_asteroids"]
