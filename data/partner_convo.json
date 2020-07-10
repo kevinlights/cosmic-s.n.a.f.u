@@ -1,0 +1,120 @@
+{
+	"gendered_terms": {
+		"endearment": {
+			"male": ["Dude", "Brah", "Bro", "Babe"],
+			"female": ["Girl", "Grrl", "Babe"],
+			"neutral": ["Babe", "Fren", "Love"]
+		},
+		"title": {
+			"male": ["Mr."],
+			"female": ["Ms."],
+			"neutral": ["Mx."]
+		}
+	},
+	"questions": [
+		{
+			"type": "random",
+			"line": "So, you remember my ex? Kept trying to call me earlier.",
+			"answers": [
+				"Sounds like Stockholm Syndrome to me.",
+				"Ignore 'em, {PARTNER_ENDEARMENT}! You're in a better place now!",
+				"Why didn't you answer? Could've talked someone else's ear off than mine."
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "random",
+			"line": "Can you believe they DELAYED the release for Stellar Conflict Episode 28??? AGAIN!?",
+			"answers": [
+				"I know, right!?",
+				"I can't believe you're still watching that crap.",
+				"Oh darn, I won't have to deal with you raging about the lore for a little while yet. How will I cope."
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "detail",
+			"detail_index": 0,
+			"line": "By the way... my cat died yesterday. ;_;",
+			"answers": [
+				"Oh no! :(",
+				"Good, that bastard kept clawing at me.",
+				"That was your cat? Looked like a fat tribble to me."
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "detail",
+			"detail_index": 1,
+			"line": "I was thinking of joining a game jam. I've been practising a bit with Godot.",
+			"answers": [
+				"Ah, nice one!",
+				"What, that FOSS crap? Stick to Unity.",
+				"Come on, only hopeless nerds do stuff like that."
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "reflection_prompt",
+			"line": "Are you paying attention? I feel like you're ignoring me.",
+			"answers": [
+				"Oh, I'm sorry, I'm a bit busy FLYING A SPACESHIP RIGHT NOW.",
+				"I think you have the wrong number. Were you trying to text We Give a Shit LTD?",
+				"Of course! I would never ignore you."
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "reflection_prompt",
+			"line": "{PLAYER_ENDEARMENT}, my shoulders are numb from CARRYING THIS CONVERSATION. Are you even there???",
+			"answers": [
+				"Jesus, {PARTNER_ENDEARMENT}, I'm flying through asteroids! Can't this wait?",
+				"I'm here!",
+				"You could use the exercise, noodlearms."
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "reflection",
+			"detail_index": 0,
+			"line": "Okay, then - I told you earlier that someone close to me died. Who was it?",
+			"answers": [
+				"Your cat, of course.",
+				"Your dog, of course.",
+				"My hopes for a stable relationship?"
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "reflection",
+			"detail_index": 1,
+			"line": "You barely even noticed when I told you about the game engine I was using!",
+			"answers": [
+				"It was Godot, right?",
+				"It was Unity, right?",
+				"You switch them like every week! Just pick one and stick with it!"
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "reflection_win",
+			"line": "Okay, I guess you were paying attention. <3",
+			"answers": [
+				"<3",
+				"Nah, I just scrolled up. You do know how phones work, right?",
+				"Oh goody, I'm not single yet, then."
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "reflection_win",
+			"line": "You've got a good memory, at least.",
+			"answers": [
+				"And remarkably poor judgement, given my choice of {PARTNER_TYPE}.",
+				"Oh, you're one to talk, {PARTNER_TITLE} Anniversary Gift.",
+				"One of my many redeeming qualities. ;)"
+			],
+			"correct_answer": 2
+		}
+	]
+}
