@@ -1,10 +1,11 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://objects/energy_system/BatteryR.tscn" type="PackedScene" id=1]
 [ext_resource path="res://sprites/backgrounds/console_left.png" type="Texture" id=2]
 [ext_resource path="res://objects/energy_system/BatteryL.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/energy_system/Component.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/energy_system/EnergySystem.gd" type="Script" id=5]
+[ext_resource path="res://sprites/back.png" type="Texture" id=6]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -30,10 +31,11 @@ __meta__ = {
 }
 
 [node name="BatteriesL" type="VBoxContainer" parent="."]
-margin_left = 100.0
-margin_top = 42.0
-margin_right = 132.0
-margin_bottom = 110.0
+margin_left = 32.0
+margin_top = 14.0
+margin_right = 64.0
+margin_bottom = 84.0
+rect_scale = Vector2( 2, 2 )
 custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -54,10 +56,11 @@ margin_top = 54.0
 margin_bottom = 68.0
 
 [node name="BatteriesR" type="VBoxContainer" parent="."]
-margin_left = 190.0
-margin_top = 42.0
-margin_right = 222.0
-margin_bottom = 110.0
+margin_left = 224.0
+margin_top = 14.0
+margin_right = 256.0
+margin_bottom = 84.0
+rect_scale = Vector2( 2, 2 )
 custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -78,11 +81,12 @@ margin_top = 54.0
 margin_bottom = 68.0
 
 [node name="Components" type="VBoxContainer" parent="."]
-margin_left = 144.0
-margin_top = 48.0
-margin_right = 176.0
-margin_bottom = 104.0
+margin_left = 128.0
+margin_top = 28.0
+margin_right = 160.0
+margin_bottom = 84.0
 rect_min_size = Vector2( 32, 48 )
+rect_scale = Vector2( 2, 2 )
 custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -109,3 +113,14 @@ margin_top = 40.0
 margin_right = 32.0
 margin_bottom = 56.0
 which_component = 2
+
+[node name="Button_Back" type="TextureButton" parent="."]
+margin_left = 2.0
+margin_top = 162.0
+margin_right = 18.0
+margin_bottom = 178.0
+texture_normal = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]

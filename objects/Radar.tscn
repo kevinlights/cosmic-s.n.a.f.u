@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://objects/Radar.gd" type="Script" id=1]
 [ext_resource path="res://sprites/backgrounds/console_center.png" type="Texture" id=2]
 [ext_resource path="res://sprites/radar_icons.png" type="Texture" id=3]
+[ext_resource path="res://sprites/back.png" type="Texture" id=4]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -36,6 +37,8 @@ region = Rect2( 16, 16, 16, 16 )
 
 [node name="Radar" type="Control"]
 material = SubResource( 1 )
+margin_right = 320.0
+margin_bottom = 180.0
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -79,6 +82,16 @@ texture_hover = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button_Back" type="TextureButton" parent="."]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 2.0
+margin_top = -18.0
+margin_right = 16.0
+margin_bottom = -2.0
+texture_normal = ExtResource( 4 )
 [connection signal="timeout" from="Timer_Update" to="." method="update_radar"]
 [connection signal="pressed" from="Button_ZoomOut" to="." method="_zoom_out"]
 [connection signal="pressed" from="Button_ZoomIn" to="." method="_zoom_in"]
+[connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]

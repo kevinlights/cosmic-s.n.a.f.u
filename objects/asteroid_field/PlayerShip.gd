@@ -8,9 +8,12 @@ const TURN_RANDOMISE_AMOUNT : float = 0.5
 var speed : float = 8.0
 var target_rotation : float = rotation
 
+signal hit_by_asteroid
+
 func hit_by_asteroid(asteroid : RigidBody2D) -> void:
 	print("We've been hit!")
 	asteroid.queue_free()
+	emit_signal("hit_by_asteroid")
 
 func _physics_process(delta : float) -> void:
 	# Turn

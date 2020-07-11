@@ -16,6 +16,8 @@ var player_ship : Area2D
 
 var zoom_level : int = 1
 
+signal back_from_radar
+
 # Why doesn't Godot have this built in!?
 func draw_circle_outline(pos : Vector2, size : float, colour : Color) -> void:
 	var points : Array = []
@@ -48,11 +50,14 @@ func update_radar():
 	update()
 
 func _zoom_out():
-	zoom_level = clamp(zoom_level - 1, 0, 2)
+	zoom_level = clamp(zoom_level + 1, 0, 2)
 	update()
 	timer_update.start(REFRESH_RATE[zoom_level])
 
 func _zoom_in():
-	zoom_level = clamp(zoom_level + 1, 0, 2)
+	zoom_level = clamp(zoom_level - 1, 0, 2)
 	update()
 	timer_update.start(REFRESH_RATE[zoom_level])
+
+func _on_Button_Back_pressed():
+	emit_signal("back_from_radar")

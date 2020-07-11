@@ -24,6 +24,8 @@ var selected_component : int = -1
 
 var game
 
+signal back_from_energy_system
+
 func battery_selected(which_battery : int) -> void:
 	# Deselect the old battery
 	if selected_battery != -1:
@@ -113,3 +115,6 @@ func _draw() -> void:
 
 func _ready() -> void:
 	setup_connections()
+
+func _on_Button_Back_pressed():
+	emit_signal("back_from_energy_system")

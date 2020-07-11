@@ -1,19 +1,39 @@
 extends Node
 
 onready var asteroid_field = $AsteroidField
-onready var radar = $Radar
-onready var energy_system = $EnergySystem
+onready var cockpit = $Shaker/Cockpit
+onready var radar = $Shaker/Radar
+onready var energy_system = $Shaker/EnergySystem
+onready var shaker = $Shaker
 
 const ENERGY_SYSTEM_UPDATE_TIME : float = 0.25
-const BATTERY_REPLACE_RATE : float = 0.25 # i.e. takes four seconds to replace
+const BATTERY_REPLACE_RATE : float = 0.1
 
 enum BatteryState {ON, DEAD, CHANGING}
 
 var connections : Array = [0, 0, 1, 2, 1, -1, -1, 2]
-var battery_charge_levels : Array = [0.2, 0.4, 0.9, 0.9, 0.8, 0.8, 0.7, 0.7]
+var battery_charge_levels : Array = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 var battery_state : Array = [BatteryState.ON, BatteryState.ON, BatteryState.ON, BatteryState.ON, BatteryState.ON, BatteryState.ON, BatteryState.ON, BatteryState.ON]
 var battery_replacement_progress : Array = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
-var battery_drain_rates : Array = [0.02, 0.02, 0.03, 0.03, 0.04, 0.04, 0.05, 0.05]
+var battery_drain_rates : Array = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+
+var shake_amount : float = 0.0
+
+func go_to_radar() -> void:
+	cockpit.hide()
+	radar.show()
+
+func go_to_energy_system() -> void:
+	cockpit.hide()
+	energy_system.show()
+
+func back_from_radar() -> void:
+	radar.hide()
+	cockpit.show()
+
+func back_from_energy_system() -> void:
+	energy_system.hide()
+	cockpit.show()
 
 func do_connections_overlap(battery_a : int, component_a : int, battery_b : int, component_b : int) -> bool:
 	# If the two batteries or the two components are the same, the connections cannot overlap
@@ -87,11 +107,28 @@ func _update_energy_system() -> void:
 	energy_system.refresh_component_alerts()
 	energy_system.update()
 
+func ship_hit_by_asteroid() -> void:
+	shake_amount = 1.0
+
+func _process(delta : float) -> void:
+	if shake_amount > 0.0:
+		shaker.rect_position = Vector2(0.0, randf() * -16.0 * pow(shake_amount, 2.0))
+		shake_amount -= delta
+	else:
+		shaker.rect_position = Vector2.ZERO
+
 func start_game() -> void:
-	battery_charge_levels.shuffle()
-	battery_drain_rates.shuffle()
+	randomize()
+	for i in range(0, connections.size()):
+		battery_charge_levels[i] = (1.0 + randf()) / 2.0
+		battery_drain_rates[i] = (randf() + 1.0) / 100.0
 
 func _ready() -> void:
+	cockpit.connect("go_to_radar", self, "go_to_radar")
+	cockpit.connect("go_to_energy_system", self, "go_to_energy_system")
+	radar.connect("back_from_radar", self, "back_from_radar")
+	energy_system.connect("back_from_energy_system", self, "back_from_energy_system")
+	asteroid_field.player_ship.connect("hit_by_asteroid", self, "ship_hit_by_asteroid")
 	radar.asteroid_field = asteroid_field
 	radar.player_ship = asteroid_field.player_ship
 	energy_system.game = self
