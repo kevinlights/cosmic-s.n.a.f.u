@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://objects/radio/Waveform.gd" type="Script" id=1]
+
+[node name="Waveform" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -512.0
+margin_bottom = -296.0
+rect_min_size = Vector2( 128, 64 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer_UpdateWaveform" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+[connection signal="timeout" from="Timer_UpdateWaveform" to="." method="update_waveform"]

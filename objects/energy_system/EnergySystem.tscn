@@ -35,50 +35,58 @@ margin_left = 32.0
 margin_top = 14.0
 margin_right = 64.0
 margin_bottom = 84.0
-rect_scale = Vector2( 2, 2 )
-custom_constants/separation = 4
+custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BatteryL1" parent="BatteriesL" instance=ExtResource( 3 )]
+margin_right = 64.0
+margin_bottom = 28.0
 
 [node name="BatteryL2" parent="BatteriesL" instance=ExtResource( 3 )]
-margin_top = 18.0
-margin_bottom = 32.0
+margin_top = 36.0
+margin_right = 64.0
+margin_bottom = 64.0
 
 [node name="BatteryL3" parent="BatteriesL" instance=ExtResource( 3 )]
-margin_top = 36.0
-margin_bottom = 50.0
+margin_top = 72.0
+margin_right = 64.0
+margin_bottom = 100.0
 
 [node name="BatteryL4" parent="BatteriesL" instance=ExtResource( 3 )]
-margin_top = 54.0
-margin_bottom = 68.0
+margin_top = 108.0
+margin_right = 64.0
+margin_bottom = 136.0
 
 [node name="BatteriesR" type="VBoxContainer" parent="."]
 margin_left = 224.0
 margin_top = 14.0
 margin_right = 256.0
 margin_bottom = 84.0
-rect_scale = Vector2( 2, 2 )
-custom_constants/separation = 4
+custom_constants/separation = 8
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="BatteryR1" parent="BatteriesR" instance=ExtResource( 1 )]
+margin_right = 64.0
+margin_bottom = 28.0
 
 [node name="BatteryR2" parent="BatteriesR" instance=ExtResource( 1 )]
-margin_top = 18.0
-margin_bottom = 32.0
+margin_top = 36.0
+margin_right = 64.0
+margin_bottom = 64.0
 
 [node name="BatteryR3" parent="BatteriesR" instance=ExtResource( 1 )]
-margin_top = 36.0
-margin_bottom = 50.0
+margin_top = 72.0
+margin_right = 64.0
+margin_bottom = 100.0
 
 [node name="BatteryR4" parent="BatteriesR" instance=ExtResource( 1 )]
-margin_top = 54.0
-margin_bottom = 68.0
+margin_top = 108.0
+margin_right = 64.0
+margin_bottom = 136.0
 
 [node name="Components" type="VBoxContainer" parent="."]
 margin_left = 128.0
@@ -86,7 +94,6 @@ margin_top = 28.0
 margin_right = 160.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 32, 48 )
-rect_scale = Vector2( 2, 2 )
 custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -95,23 +102,23 @@ __meta__ = {
 [node name="Component1" parent="Components" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 32.0
-margin_bottom = 16.0
+margin_right = 64.0
+margin_bottom = 32.0
 
 [node name="Component2" parent="Components" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 20.0
-margin_right = 32.0
-margin_bottom = 36.0
+margin_top = 36.0
+margin_right = 64.0
+margin_bottom = 68.0
 which_component = 1
 
 [node name="Component3" parent="Components" instance=ExtResource( 4 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_top = 40.0
-margin_right = 32.0
-margin_bottom = 56.0
+margin_top = 72.0
+margin_right = 64.0
+margin_bottom = 104.0
 which_component = 2
 
 [node name="Button_Back" type="TextureButton" parent="."]

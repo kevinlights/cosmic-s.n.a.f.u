@@ -23,6 +23,9 @@ margin_left = 63.0
 margin_top = 57.0
 margin_right = 112.0
 margin_bottom = 126.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button_Radar" type="TextureButton" parent="."]
 margin_left = 119.0
@@ -32,5 +35,15 @@ margin_bottom = 113.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button_Radio" type="TextureButton" parent="."]
+margin_left = 207.326
+margin_top = 57.8909
+margin_right = 256.326
+margin_bottom = 126.891
+__meta__ = {
+"_edit_use_anchors_": false
+}
 [connection signal="pressed" from="Button_Energy" to="." method="_on_Button_Energy_pressed"]
 [connection signal="pressed" from="Button_Radar" to="." method="_on_Button_Radar_pressed"]
+[connection signal="pressed" from="Button_Radio" to="." method="_on_Button_Radio_pressed"]

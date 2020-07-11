@@ -18,9 +18,9 @@ func update_icon() -> void:
 	button.texture_normal = button.texture_normal.duplicate()
 	button.texture_hover = button.texture_hover.duplicate()
 	button.texture_pressed = button.texture_pressed.duplicate()
-	button.texture_normal.region.position.x = (1 + which_component) * 16
-	button.texture_hover.region.position.x = (1 + which_component) * 16
-	button.texture_pressed.region.position.x = (1 + which_component) * 16
+	button.texture_normal.region.position.x = (1 + which_component) * 32
+	button.texture_hover.region.position.x = (1 + which_component) * 32
+	button.texture_pressed.region.position.x = (1 + which_component) * 32
 	
 func _blink_alerts():
 	for alert in [alert_l, alert_r]:

@@ -8,27 +8,27 @@ blend_mode = 1
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 1 )
-region = Rect2( 16, 32, 16, 16 )
+region = Rect2( 32, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 1 )
-region = Rect2( 16, 32, 16, 16 )
+region = Rect2( 32, 64, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 1 )
-region = Rect2( 16, 16, 16, 16 )
+region = Rect2( 32, 32, 32, 32 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
-region = Rect2( 4, 32, 8, 16 )
+region = Rect2( 8, 64, 16, 32 )
 
 [node name="Component" type="Control"]
 material = SubResource( 1 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_right = -608.0
-margin_bottom = -344.0
-rect_min_size = Vector2( 32, 16 )
+margin_right = -576.0
+margin_bottom = -328.0
+rect_min_size = Vector2( 64, 32 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -36,10 +36,10 @@ __meta__ = {
 
 [node name="Button" type="TextureButton" parent="."]
 use_parent_material = true
-margin_left = 8.0
-margin_right = 24.0
-margin_bottom = 16.0
-rect_min_size = Vector2( 16, 16 )
+margin_left = 16.0
+margin_right = 48.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 32 )
 texture_normal = SubResource( 2 )
 texture_pressed = SubResource( 3 )
 texture_hover = SubResource( 4 )
@@ -50,17 +50,17 @@ __meta__ = {
 [node name="AlertL" type="TextureRect" parent="."]
 visible = false
 use_parent_material = true
-margin_left = 2.0
-margin_right = 10.0
-margin_bottom = 16.0
+margin_left = 4.0
+margin_right = 20.0
+margin_bottom = 32.0
 texture = SubResource( 5 )
 
 [node name="AlertR" type="TextureRect" parent="."]
 visible = false
 use_parent_material = true
-margin_left = 22.0
-margin_right = 30.0
-margin_bottom = 16.0
+margin_left = 44.0
+margin_right = 60.0
+margin_bottom = 32.0
 texture = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -68,17 +68,17 @@ __meta__ = {
 
 [node name="ConnectorL" type="Control" parent="."]
 visible = false
-margin_left = 6.0
-margin_top = 8.0
-margin_right = 6.0
-margin_bottom = 8.0
+margin_left = 12.0
+margin_top = 16.0
+margin_right = 12.0
+margin_bottom = 16.0
 
 [node name="ConnectorR" type="Control" parent="."]
 visible = false
-margin_left = 26.0
-margin_top = 8.0
-margin_right = 26.0
-margin_bottom = 8.0
+margin_left = 52.0
+margin_top = 16.0
+margin_right = 52.0
+margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

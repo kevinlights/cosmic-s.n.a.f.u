@@ -9,33 +9,33 @@ blend_mode = 1
 
 [sub_resource type="AtlasTexture" id=2]
 atlas = ExtResource( 2 )
-region = Rect2( 16, 2, 16, 12 )
+region = Rect2( 32, 4, 32, 24 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 32, 2, 16, 12 )
+region = Rect2( 64, 4, 32, 24 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 18, 16, 12 )
+region = Rect2( 0, 36, 32, 24 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 18, 16, 12 )
+region = Rect2( 0, 36, 32, 24 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 2, 16, 12 )
+region = Rect2( 0, 4, 32, 24 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 48, 1, 16, 12 )
+region = Rect2( 96, 2, 32, 28 )
 
 [node name="BatteryR" type="Control"]
 material = SubResource( 1 )
 margin_right = 32.0
 margin_bottom = 14.0
-rect_min_size = Vector2( 32, 14 )
+rect_min_size = Vector2( 64, 28 )
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -43,20 +43,20 @@ __meta__ = {
 
 [node name="Button_Select" type="TextureButton" parent="."]
 use_parent_material = true
-margin_top = 1.0
-margin_right = 16.0
-margin_bottom = 13.0
-rect_min_size = Vector2( 16, 12 )
+margin_top = 2.0
+margin_right = 32.0
+margin_bottom = 26.0
+rect_min_size = Vector2( 32, 24 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ChargeIndicator" type="TextureProgress" parent="Button_Select"]
 use_parent_material = true
-margin_right = 16.0
-margin_bottom = 12.0
+margin_right = 32.0
+margin_bottom = 24.0
 max_value = 12.0
-value = 2.0
+value = 5.0
 texture_over = SubResource( 2 )
 texture_progress = SubResource( 3 )
 fill_mode = 3
@@ -66,10 +66,10 @@ __meta__ = {
 
 [node name="Button_Refresh" type="TextureButton" parent="."]
 use_parent_material = true
-margin_left = 16.0
-margin_top = 1.0
-margin_right = 32.0
-margin_bottom = 13.0
+margin_left = 32.0
+margin_top = 2.0
+margin_right = 64.0
+margin_bottom = 26.0
 texture_normal = SubResource( 4 )
 texture_pressed = SubResource( 5 )
 texture_hover = SubResource( 6 )
@@ -80,9 +80,9 @@ __meta__ = {
 [node name="Label_Recharging" type="Label" parent="."]
 visible = false
 use_parent_material = true
-margin_top = 1.0
-margin_right = 32.0
-margin_bottom = 12.0
+margin_top = 2.0
+margin_right = 64.0
+margin_bottom = 26.0
 custom_fonts/font = ExtResource( 1 )
 custom_colors/font_color = Color( 0.407843, 0.498039, 0.541176, 1 )
 text = "010%"
@@ -95,18 +95,16 @@ __meta__ = {
 [node name="Texture_Dead" type="TextureRect" parent="."]
 visible = false
 use_parent_material = true
-margin_right = 40.0
-margin_bottom = 40.0
+margin_right = 32.0
+margin_bottom = 32.0
 texture = SubResource( 7 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Connector" type="Control" parent="."]
-margin_left = -4.0
-margin_top = 8.0
-margin_right = -4.0
-margin_bottom = 8.0
+use_parent_material = true
+margin_left = -8.0
+margin_top = 16.0
+margin_right = -8.0
+margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }

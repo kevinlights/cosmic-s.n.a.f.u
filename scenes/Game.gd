@@ -4,7 +4,9 @@ onready var asteroid_field = $AsteroidField
 onready var cockpit = $Shaker/Cockpit
 onready var radar = $Shaker/Radar
 onready var energy_system = $Shaker/EnergySystem
+onready var radio = $Shaker/Radio
 onready var shaker = $Shaker
+onready var starfield = $Starfield
 
 const ENERGY_SYSTEM_UPDATE_TIME : float = 0.25
 const BATTERY_REPLACE_RATE : float = 0.1
@@ -17,6 +19,11 @@ var battery_state : Array = [BatteryState.ON, BatteryState.ON, BatteryState.ON, 
 var battery_replacement_progress : Array = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 var battery_drain_rates : Array = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
 
+var radio_angle : float = 0.5
+var radio_frequency : float = 0.5
+
+var signal_strength : float = 0.5
+
 var shake_amount : float = 0.0
 
 func go_to_radar() -> void:
@@ -27,12 +34,20 @@ func go_to_energy_system() -> void:
 	cockpit.hide()
 	energy_system.show()
 
+func go_to_radio() -> void:
+	cockpit.hide()
+	radio.show()
+
 func back_from_radar() -> void:
 	radar.hide()
 	cockpit.show()
 
 func back_from_energy_system() -> void:
 	energy_system.hide()
+	cockpit.show()
+
+func back_from_radio() -> void:
+	radio.hide()
 	cockpit.show()
 
 func do_connections_overlap(battery_a : int, component_a : int, battery_b : int, component_b : int) -> bool:
@@ -107,29 +122,51 @@ func _update_energy_system() -> void:
 	energy_system.refresh_component_alerts()
 	energy_system.update()
 
+func evaluate_signal_source(signal_source) -> float:
+	var relative_position : Vector2 = signal_source.global_position - asteroid_field.player_ship.global_position
+	# Get ready for some high-quality jank!
+	var radar_direction : Vector2 = Vector2.RIGHT.rotated(radio_angle * PI * 2.0)
+	var direction_match : float = (relative_position.normalized() - radar_direction).length() / 2.0
+	var frequency_match : float = abs(sin(signal_source.frequency) * cos(radio_frequency * PI * 2.0))
+	var signal_strength : float = 1.0 - clamp(relative_position.length() / 320.0, 0.0, 1.0)
+	return direction_match * frequency_match * signal_strength
+
+func _update_radio() -> void:
+	var best_signal : float = 0.0
+	for signal_source in get_tree().get_nodes_in_group("signal_source"):
+		best_signal = max(best_signal, evaluate_signal_source(signal_source))
+	signal_strength = best_signal
+	radio.set_signal_strength(best_signal)
+
 func ship_hit_by_asteroid() -> void:
 	shake_amount = 1.0
 
 func _process(delta : float) -> void:
+	# Shake it, baby
 	if shake_amount > 0.0:
 		shaker.rect_position = Vector2(0.0, randf() * -16.0 * pow(shake_amount, 2.0))
 		shake_amount -= delta
 	else:
 		shaker.rect_position = Vector2.ZERO
+	# Move starfield
+	starfield.rect_position.x = (wrapf(-asteroid_field.player_ship.rotation / PI, 0.0, 1.0) * 640.0) - 640.0
 
 func start_game() -> void:
 	randomize()
 	for i in range(0, connections.size()):
-		battery_charge_levels[i] = (1.0 + randf()) / 2.0
+		battery_charge_levels[i] = (randf() + 1.0) / 2.0
 		battery_drain_rates[i] = (randf() + 1.0) / 100.0
 
 func _ready() -> void:
 	cockpit.connect("go_to_radar", self, "go_to_radar")
 	cockpit.connect("go_to_energy_system", self, "go_to_energy_system")
+	cockpit.connect("go_to_radio", self, "go_to_radio")
 	radar.connect("back_from_radar", self, "back_from_radar")
 	energy_system.connect("back_from_energy_system", self, "back_from_energy_system")
+	radio.connect("back_from_radio", self, "back_from_radio")
 	asteroid_field.player_ship.connect("hit_by_asteroid", self, "ship_hit_by_asteroid")
 	radar.asteroid_field = asteroid_field
 	radar.player_ship = asteroid_field.player_ship
 	energy_system.game = self
+	radio.game = self
 	start_game()

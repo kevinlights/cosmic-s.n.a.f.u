@@ -3,9 +3,10 @@ extends Node2D
 class_name AsteroidField
 
 const Asteroid = preload("res://objects/asteroid_field/Asteroid.tscn")
+const SignalSource = preload("res://objects/asteroid_field/SignalSource.tscn")
 
 const ASTEROID_COUNT : int = 128
-const ASTEROID_VELOCITY : float = 4.0
+const ASTEROID_VELOCITY : float = 6.0
 const FIELD_BOUNDS : Rect2 = Rect2(0, 0, 512, 512)
 
 onready var player_ship = $PlayerShip
@@ -16,6 +17,13 @@ func spawn_asteroids() -> void:
 		asteroid.position = Vector2(randf(), randf()) * FIELD_BOUNDS.size
 		asteroid.linear_velocity = Vector2(randf(), randf()) * ASTEROID_VELOCITY
 		add_child(asteroid)
+
+func spawn_signal_sources() -> void:
+	for x in range(0, 4):
+		for y in range(0, 4):
+			var signal_source = SignalSource.instance()
+			signal_source.position = Vector2(x + (randf() * 0.5), y + (randf() * 0.5)) * 128.0
+			add_child(signal_source)
 
 # Turns out you can't use wrapf() to keep asteroids inside the play area.
 # Instead, if an asteroid moves outside that bounds, we despawn it, and spawn
@@ -38,5 +46,4 @@ func _update_asteroids():
 
 func _ready() -> void:
 	spawn_asteroids()
-
-
+	spawn_signal_sources()

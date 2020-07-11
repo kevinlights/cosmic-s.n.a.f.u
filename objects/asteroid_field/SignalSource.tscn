@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://objects/asteroid_field/SignalSource.gd" type="Script" id=1]
+[ext_resource path="res://sprites/radar_objects.png" type="Texture" id=2]
+
+[node name="SignalSource" type="Node2D" groups=[
+"signal_source",
+]]
+modulate = Color( 1, 0, 0, 1 )
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+region_enabled = true
+region_rect = Rect2( 16, 0, 16, 16 )
+
+[node name="Timer_ChangeFrequency" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+[connection signal="timeout" from="Timer_ChangeFrequency" to="." method="_on_Timer_ChangeFrequency_timeout"]
