@@ -16,5 +16,8 @@ visible = false
 position = Vector2( 160, 90 )
 
 [node name="EnergySystem" parent="." instance=ExtResource( 4 )]
-margin_left = -0.943878
-margin_right = -0.943878
+
+[node name="Timer_UpdateEnergySystem" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+[connection signal="timeout" from="Timer_UpdateEnergySystem" to="." method="_update_energy_system"]

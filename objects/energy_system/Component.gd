@@ -10,6 +10,10 @@ onready var connector_r = $ConnectorR
 
 signal component_selected
 
+func set_alerts_visible(left : bool, right : bool) -> void:
+	alert_l.visible = left
+	alert_r.visible = right
+
 func update_icon() -> void:
 	button.texture_normal = button.texture_normal.duplicate()
 	button.texture_hover = button.texture_hover.duplicate()
@@ -17,6 +21,13 @@ func update_icon() -> void:
 	button.texture_normal.region.position.x = (1 + which_component) * 16
 	button.texture_hover.region.position.x = (1 + which_component) * 16
 	button.texture_pressed.region.position.x = (1 + which_component) * 16
+	
+func _blink_alerts():
+	for alert in [alert_l, alert_r]:
+		if alert.modulate == Color.white:
+			alert.modulate = Color.transparent
+		else:
+			alert.modulate = Color.white
 
 func _ready() -> void:
 	update_icon()
