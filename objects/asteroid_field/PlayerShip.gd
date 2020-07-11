@@ -3,9 +3,9 @@ extends Area2D
 class_name PlayerShip
 
 const TURNING_SPEED : float = 0.5
-const TURN_RANDOMISE_AMOUNT : float = 5.0
+const TURN_RANDOMISE_AMOUNT : float = 0.5
 
-var speed : float = 32.0
+var speed : float = 8.0
 var target_rotation : float = rotation
 
 func hit_by_asteroid(asteroid : RigidBody2D) -> void:

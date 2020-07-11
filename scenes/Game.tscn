@@ -13,7 +13,6 @@ visible = false
 
 [node name="Radar" parent="." instance=ExtResource( 2 )]
 visible = false
-position = Vector2( 160, 90 )
 
 [node name="EnergySystem" parent="." instance=ExtResource( 4 )]
 
