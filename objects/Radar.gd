@@ -3,6 +3,9 @@ extends Control
 const Icons = preload("res://sprites/radar_objects.png")
 
 onready var timer_update = $Timer_Update
+onready var label_no_signal = $Label_NoSignal
+onready var button_zoom_out = $Button_ZoomOut
+onready var button_zoom_in = $Button_ZoomIn
 
 const COLOUR_HUD = Color("687f8a")
 
@@ -13,6 +16,7 @@ const REFRESH_RATE : Array = [0.25, 0.5, 1.0]
 
 var asteroid_field : Node2D
 var player_ship : Area2D
+var game
 
 var zoom_level : int = 1
 
@@ -26,6 +30,8 @@ func draw_circle_outline(pos : Vector2, size : float, colour : Color) -> void:
 	draw_polyline(points, colour)
 
 func _draw() -> void:
+	if not game.signal_is_good():
+		return
 	draw_set_transform(Vector2(160, 84), deg2rad(-90.0), Vector2(1.0, 1.0))
 	# Draw rings
 	for i in range(0.0, 65.0, RING_INTERVAL[zoom_level]):
@@ -48,6 +54,9 @@ func _draw() -> void:
 
 func update_radar():
 	update()
+	label_no_signal.visible = !game.signal_is_good()
+	button_zoom_in.visible = game.signal_is_good()
+	button_zoom_out.visible = game.signal_is_good()
 
 func _zoom_out():
 	zoom_level = clamp(zoom_level + 1, 0, 2)

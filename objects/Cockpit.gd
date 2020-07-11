@@ -1,7 +1,5 @@
 extends Control
 
-onready var starfield = $Starfield
-
 signal go_to_radar
 signal go_to_energy_system
 signal go_to_radio

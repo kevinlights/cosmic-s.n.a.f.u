@@ -10,6 +10,7 @@ onready var starfield = $Starfield
 
 const ENERGY_SYSTEM_UPDATE_TIME : float = 0.25
 const BATTERY_REPLACE_RATE : float = 0.1
+const SIGNAL_THRESHOLD : float = 0.3
 
 enum BatteryState {ON, DEAD, CHANGING}
 
@@ -122,6 +123,9 @@ func _update_energy_system() -> void:
 	energy_system.refresh_component_alerts()
 	energy_system.update()
 
+func signal_is_good() -> bool:
+	return signal_strength > SIGNAL_THRESHOLD
+
 func evaluate_signal_source(signal_source) -> float:
 	var relative_position : Vector2 = signal_source.global_position - asteroid_field.player_ship.global_position
 	# Get ready for some high-quality jank!
@@ -168,5 +172,6 @@ func _ready() -> void:
 	radar.asteroid_field = asteroid_field
 	radar.player_ship = asteroid_field.player_ship
 	energy_system.game = self
+	radar.game = self
 	radio.game = self
 	start_game()

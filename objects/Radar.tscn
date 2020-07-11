@@ -1,37 +1,41 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://objects/Radar.gd" type="Script" id=1]
 [ext_resource path="res://sprites/backgrounds/console_center.png" type="Texture" id=2]
 [ext_resource path="res://sprites/radar_icons.png" type="Texture" id=3]
 [ext_resource path="res://sprites/back.png" type="Texture" id=4]
+[ext_resource path="res://fonts/computer.tres" type="DynamicFont" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id=9]
 blend_mode = 1
 
 [sub_resource type="CanvasItemMaterial" id=2]
 blend_mode = 1
 
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 0, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 3 )
-region = Rect2( 0, 16, 16, 16 )
-
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 3 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 3 )
-region = Rect2( 16, 0, 16, 16 )
+region = Rect2( 0, 0, 16, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 16, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 3 )
 region = Rect2( 16, 16, 16, 16 )
 
@@ -53,9 +57,21 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Timer_Update" type="Timer" parent="."]
-wait_time = 0.25
-autostart = true
+[node name="Label_NoSignal" type="Label" parent="."]
+modulate = Color( 0.407843, 0.498039, 0.541176, 1 )
+material = SubResource( 9 )
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -36.0
+margin_top = -14.0
+margin_right = 36.0
+custom_fonts/font = ExtResource( 5 )
+text = "NO SIGNAL"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button_ZoomOut" type="TextureButton" parent="."]
 material = SubResource( 2 )
@@ -63,9 +79,9 @@ margin_left = 16.0
 margin_top = 10.0
 margin_right = 32.0
 margin_bottom = 26.0
-texture_normal = SubResource( 6 )
-texture_pressed = SubResource( 7 )
-texture_hover = SubResource( 8 )
+texture_normal = SubResource( 3 )
+texture_pressed = SubResource( 4 )
+texture_hover = SubResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,9 +92,9 @@ margin_left = 34.0
 margin_top = 10.0
 margin_right = 50.0
 margin_bottom = 26.0
-texture_normal = SubResource( 3 )
-texture_pressed = SubResource( 4 )
-texture_hover = SubResource( 5 )
+texture_normal = SubResource( 6 )
+texture_pressed = SubResource( 7 )
+texture_hover = SubResource( 8 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -91,7 +107,11 @@ margin_top = -18.0
 margin_right = 16.0
 margin_bottom = -2.0
 texture_normal = ExtResource( 4 )
-[connection signal="timeout" from="Timer_Update" to="." method="update_radar"]
+
+[node name="Timer_Update" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
 [connection signal="pressed" from="Button_ZoomOut" to="." method="_zoom_out"]
 [connection signal="pressed" from="Button_ZoomIn" to="." method="_zoom_in"]
 [connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]
+[connection signal="timeout" from="Timer_Update" to="." method="update_radar"]
