@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 onready var asteroid_field = $AsteroidField
 onready var radar = $Radar

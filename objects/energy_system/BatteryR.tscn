@@ -1,0 +1,94 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://fonts/computer.tres" type="DynamicFont" id=1]
+[ext_resource path="res://sprites/energy_icons.png" type="Texture" id=2]
+[ext_resource path="res://objects/energy_system/Battery.gd" type="Script" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 2, 16, 12 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 2, 16, 12 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 18, 16, 12 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 18, 16, 12 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 2, 16, 12 )
+
+[node name="BatteryR" type="Control"]
+margin_right = 32.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 32, 14 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Select" type="TextureButton" parent="."]
+margin_top = 1.0
+margin_right = 16.0
+margin_bottom = 13.0
+rect_min_size = Vector2( 16, 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ChargeIndicator" type="TextureProgress" parent="Button_Select"]
+margin_right = 16.0
+margin_bottom = 12.0
+max_value = 12.0
+value = 2.0
+texture_over = SubResource( 1 )
+texture_progress = SubResource( 2 )
+fill_mode = 3
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Refresh" type="TextureButton" parent="."]
+margin_left = 16.0
+margin_top = 1.0
+margin_right = 32.0
+margin_bottom = 13.0
+texture_normal = SubResource( 3 )
+texture_pressed = SubResource( 5 )
+texture_hover = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_Recharging" type="Label" parent="."]
+visible = false
+margin_top = 1.0
+margin_right = 32.0
+margin_bottom = 12.0
+custom_fonts/font = ExtResource( 1 )
+custom_colors/font_color = Color( 0.92549, 0.643137, 0, 1 )
+text = "010%"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Connector" type="Control" parent="."]
+margin_left = -4.0
+margin_top = 8.0
+margin_right = -4.0
+margin_bottom = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="mouse_entered" from="Button_Select" to="." method="_on_Button_Select_mouse_entered"]
+[connection signal="mouse_exited" from="Button_Select" to="." method="_on_Button_Select_mouse_exited"]
+[connection signal="pressed" from="Button_Select" to="." method="_on_Button_Select_pressed"]
+[connection signal="pressed" from="Button_Refresh" to="." method="_on_Button_Refresh_pressed"]
