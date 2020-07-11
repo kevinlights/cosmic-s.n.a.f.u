@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cooling.ogg-de5ce0dc54d0e4ccbff9570c6015c25c.oggstr"
+
+[deps]
+
+source_file="res://music/assets/cooling.ogg"
+dest_files=[ "res://.import/cooling.ogg-de5ce0dc54d0e4ccbff9570c6015c25c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0.0

@@ -14,14 +14,50 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://objects/asteroid_field/AsteroidField.gd"
 }, {
+"base": "Node",
+"class": "MusicBooth",
+"language": "GDScript",
+"path": "res://addons/audio_booth/source/music/MusicBooth.gd"
+}, {
 "base": "Area2D",
 "class": "PlayerShip",
 "language": "GDScript",
 "path": "res://objects/asteroid_field/PlayerShip.gd"
+}, {
+"base": "Node",
+"class": "Song",
+"language": "GDScript",
+"path": "res://addons/audio_booth/source/music/Song.gd"
+}, {
+"base": "Node",
+"class": "Sound",
+"language": "GDScript",
+"path": "res://addons/audio_booth/source/sfx/Sound.gd"
+}, {
+"base": "Node",
+"class": "SoundBooth",
+"language": "GDScript",
+"path": "res://addons/audio_booth/source/sfx/SoundBooth.gd"
+}, {
+"base": "Node",
+"class": "StingerContainer",
+"language": "GDScript",
+"path": "res://addons/audio_booth/source/music/containers/StingerContainer.gd"
+}, {
+"base": "Node",
+"class": "TrackContainer",
+"language": "GDScript",
+"path": "res://addons/audio_booth/source/music/containers/TrackContainer.gd"
 } ]
 _global_script_class_icons={
 "AsteroidField": "",
-"PlayerShip": ""
+"MusicBooth": "",
+"PlayerShip": "",
+"Song": "",
+"Sound": "",
+"SoundBooth": "",
+"StingerContainer": "",
+"TrackContainer": ""
 }
 
 [application]
@@ -36,6 +72,11 @@ window/size/height=360
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 window/stretch/shrink=2.0
+
+[editor_plugins]
+
+enabled=PoolStringArray( "audio_booth" )
+
 
 [rendering]
 
