@@ -11,8 +11,11 @@ onready var starfield = $Starfield
 const ENERGY_SYSTEM_UPDATE_TIME : float = 0.25
 const BATTERY_REPLACE_RATE : float = 0.1
 const SIGNAL_THRESHOLD : float = 0.3
+const SHIELD_CHARGE_RATE : float = 0.25
+const SHIELDS_DELTA : float = 0.25
 
 enum BatteryState {ON, DEAD, CHANGING}
+enum ShieldState {ON, OFF, CHARGING}
 
 var connections : Array = [0, 0, 1, 2, 1, -1, -1, 2]
 var battery_charge_levels : Array = [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
@@ -25,6 +28,8 @@ var radio_frequency : float = 0.5
 
 var signal_strength : float = 0.5
 
+var shield_state : Array = [ShieldState.ON, ShieldState.ON, ShieldState.ON, ShieldState.ON]
+var shield_recharge_rate : Array = [0.0, 0.0, 0.0, 0.0]
 var health : int = 3
 
 var shake_amount : float = 0.0
@@ -150,6 +155,46 @@ func _update_radio() -> void:
 	signal_strength = best_signal
 	radio.set_signal_strength(best_signal)
 
+func _update_shields() -> void:
+	for i in range(0, shield_state.size()):
+		match shield_state[i]:
+			ShieldState.CHARGING:
+				shield_recharge_rate[i] += SHIELD_CHARGE_RATE * SHIELDS_DELTA
+				if shield_recharge_rate[i] >= 1.0:
+					shield_state[i] = ShieldState.ON
+					shield_recharge_rate[i] = 0
+	set_shields_up()
+	radar.shield_indicator.update()
+
+func get_shields_power_drain() -> float:
+	var result : float = 0.0
+	for i in range(0, shield_state.size()):
+		match shield_state[i]:
+			ShieldState.OFF:
+				result += 0.025
+			ShieldState.ON:
+				result += 0.1
+			ShieldState.CHARGING:
+				result += 0.5
+	return result
+
+func set_shields_up() -> void:
+	for i in range(0, shield_state.size()):
+		asteroid_field.player_ship.set_shield_up(i, shield_state[i] == ShieldState.ON)
+		#radar.shield_indicator.update_shield_indicator(i, shield_state[i] == ShieldState.ON)
+
+func asteroid_hit_shield(which_shield : int) -> void:
+	shield_state[which_shield] = ShieldState.CHARGING
+	shield_recharge_rate[which_shield] = 0.0
+
+func shield_toggled(which_shield : int) -> void:
+	if shield_state[which_shield] == ShieldState.ON:
+		shield_state[which_shield] = ShieldState.OFF
+	else:
+		shield_state[which_shield] = ShieldState.CHARGING
+		shield_recharge_rate[which_shield] = 0.0
+	radar.shield_indicator.update()
+
 func ship_hit_by_asteroid() -> void:
 	shake_amount = 1.0
 	health -= 1
@@ -185,13 +230,17 @@ func _ready() -> void:
 	cockpit.connect("go_to_energy_system", self, "go_to_energy_system")
 	cockpit.connect("go_to_radio", self, "go_to_radio")
 	radar.connect("back_from_radar", self, "back_from_radar")
+	radar.connect("fire_missile", self, "fire_missile")
+	radar.connect("shield_toggled", self, "shield_toggled")
 	energy_system.connect("back_from_energy_system", self, "back_from_energy_system")
 	radio.connect("back_from_radio", self, "back_from_radio")
 	asteroid_field.player_ship.connect("hit_by_asteroid", self, "ship_hit_by_asteroid")
+	asteroid_field.player_ship.connect("asteroid_hit_shield", self, "asteroid_hit_shield")
 	radar.asteroid_field = asteroid_field
 	radar.player_ship = asteroid_field.player_ship
 	energy_system.game = self
 	radar.game = self
+	radar.shield_indicator.game = self
 	radio.game = self
 	# Game on!
 	start_game()

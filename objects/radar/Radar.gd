@@ -6,6 +6,7 @@ onready var timer_update = $Timer_Update
 onready var label_no_signal = $Label_NoSignal
 onready var button_zoom_out = $Button_ZoomOut
 onready var button_zoom_in = $Button_ZoomIn
+onready var shield_indicator = $ShieldIndicator
 
 const COLOUR_HUD = Color("687f8a")
 
@@ -21,6 +22,8 @@ var game
 var zoom_level : int = 1
 
 signal back_from_radar
+signal fire_missile
+signal shield_toggled
 
 # Why doesn't Godot have this built in!?
 func draw_circle_outline(pos : Vector2, size : float, colour : Color) -> void:
@@ -59,7 +62,10 @@ func update_radar():
 	button_zoom_out.visible = game.signal_is_good()
 
 func _fire_missile() -> void:
-	game.fire_missile()
+	emit_signal("fire_missile")
+
+func _shield_toggled(which : int) -> void:
+	emit_signal("shield_toggled", which)
 
 func _zoom_out():
 	zoom_level = clamp(zoom_level + 1, 0, 2)

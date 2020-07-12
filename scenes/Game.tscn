@@ -8,7 +8,6 @@
 [ext_resource path="res://objects/Starfield.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/radio/Radio.tscn" type="PackedScene" id=7]
 
-
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
 
@@ -46,5 +45,10 @@ autostart = true
 [node name="Timer_UpdateRadio" type="Timer" parent="."]
 wait_time = 0.1
 autostart = true
+
+[node name="Timer_UpdateShields" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
 [connection signal="timeout" from="Timer_UpdateEnergySystem" to="." method="_update_energy_system"]
 [connection signal="timeout" from="Timer_UpdateRadio" to="." method="_update_radio"]
+[connection signal="timeout" from="Timer_UpdateShields" to="." method="_update_shields"]

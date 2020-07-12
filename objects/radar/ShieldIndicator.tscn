@@ -1,6 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://sprites/shield_indicator.png" type="Texture" id=1]
+[ext_resource path="res://objects/radar/ShieldIndicator.gd" type="Script" id=2]
+
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 1 )
@@ -23,10 +27,12 @@ atlas = ExtResource( 1 )
 region = Rect2( 48, 0, 8, 56 )
 
 [node name="ShieldIndicator" type="Control"]
+material = SubResource( 6 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -584.0
 margin_bottom = -304.0
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -40,12 +46,14 @@ margin_bottom = 48.0
 texture = SubResource( 5 )
 
 [node name="Texture_Shield_Fore" type="TextureRect" parent="."]
+modulate = Color( 0.407843, 0.498039, 0.541176, 1 )
 use_parent_material = true
 margin_right = 56.0
 margin_bottom = 8.0
 texture = SubResource( 1 )
 
 [node name="Texture_Shield_Aft" type="TextureRect" parent="."]
+modulate = Color( 0.407843, 0.498039, 0.541176, 1 )
 use_parent_material = true
 margin_top = 48.0
 margin_right = 56.0
@@ -56,6 +64,7 @@ __meta__ = {
 }
 
 [node name="Texture_Shield_Port" type="TextureRect" parent="."]
+modulate = Color( 0.407843, 0.498039, 0.541176, 1 )
 use_parent_material = true
 margin_right = 8.0
 margin_bottom = 56.0
@@ -65,6 +74,7 @@ __meta__ = {
 }
 
 [node name="Texture_Shield_Starboard" type="TextureRect" parent="."]
+modulate = Color( 0.407843, 0.498039, 0.541176, 1 )
 use_parent_material = true
 margin_left = 48.0
 margin_right = 56.0
@@ -73,3 +83,53 @@ texture = SubResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Button_Shield_Fore" type="TextureButton" parent="."]
+margin_left = 12.0
+margin_right = 44.0
+margin_bottom = 8.0
+rect_min_size = Vector2( 32, 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Shield_Aft" type="TextureButton" parent="."]
+margin_left = 12.0
+margin_top = 48.0
+margin_right = 44.0
+margin_bottom = 56.0
+rect_min_size = Vector2( 32, 8 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Shield_Port" type="TextureButton" parent="."]
+margin_top = 12.0
+margin_right = 8.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 8, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button_Shield_Starboard" type="TextureButton" parent="."]
+margin_left = 48.0
+margin_top = 12.0
+margin_right = 56.0
+margin_bottom = 44.0
+rect_min_size = Vector2( 8, 32 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="mouse_entered" from="Button_Shield_Fore" to="." method="_on_Button_Shield_Fore_mouse_entered"]
+[connection signal="mouse_exited" from="Button_Shield_Fore" to="." method="_on_Button_Shield_Fore_mouse_exited"]
+[connection signal="pressed" from="Button_Shield_Fore" to="." method="_on_Button_Shield_Fore_pressed"]
+[connection signal="mouse_entered" from="Button_Shield_Aft" to="." method="_on_Button_Shield_Aft_mouse_entered"]
+[connection signal="mouse_exited" from="Button_Shield_Aft" to="." method="_on_Button_Shield_Aft_mouse_exited"]
+[connection signal="pressed" from="Button_Shield_Aft" to="." method="_on_Button_Shield_Aft_pressed"]
+[connection signal="mouse_entered" from="Button_Shield_Port" to="." method="_on_Button_Shield_Port_mouse_entered"]
+[connection signal="mouse_exited" from="Button_Shield_Port" to="." method="_on_Button_Shield_Port_mouse_exited"]
+[connection signal="pressed" from="Button_Shield_Port" to="." method="_on_Button_Shield_Port_pressed"]
+[connection signal="mouse_entered" from="Button_Shield_Starboard" to="." method="_on_Button_Shield_Starboard_mouse_entered"]
+[connection signal="mouse_exited" from="Button_Shield_Starboard" to="." method="_on_Button_Shield_Starboard_mouse_exited"]
+[connection signal="pressed" from="Button_Shield_Starboard" to="." method="_on_Button_Shield_Starboard_pressed"]

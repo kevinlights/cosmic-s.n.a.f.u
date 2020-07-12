@@ -88,9 +88,9 @@ __meta__ = {
 
 [node name="ShieldIndicator" parent="." instance=ExtResource( 6 )]
 margin_left = 240.0
-margin_top = 54.0
+margin_top = 16.0
 margin_right = -80.0
-margin_bottom = -126.0
+margin_bottom = -164.0
 
 [node name="Button_ZoomOut" type="TextureButton" parent="."]
 material = SubResource( 3 )
@@ -146,6 +146,7 @@ __meta__ = {
 [node name="Timer_Update" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+[connection signal="shield_toggled" from="ShieldIndicator" to="." method="_shield_toggled"]
 [connection signal="pressed" from="Button_ZoomOut" to="." method="_zoom_out"]
 [connection signal="pressed" from="Button_ZoomIn" to="." method="_zoom_in"]
 [connection signal="pressed" from="Button_Fire" to="." method="_fire_missile"]
