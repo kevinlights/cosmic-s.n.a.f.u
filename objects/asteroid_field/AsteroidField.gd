@@ -15,6 +15,9 @@ func spawn_asteroids() -> void:
 	for i in range(0, ASTEROID_COUNT):
 		var asteroid = Asteroid.instance()
 		asteroid.position = Vector2(randf(), randf()) * FIELD_BOUNDS.size
+		# Make sure we're not starting the player too close to any asteroids
+		while asteroid.position.distance_to(player_ship.position) < 64.0:
+			asteroid.position = Vector2(randf(), randf()) * FIELD_BOUNDS.size
 		asteroid.linear_velocity = Vector2(randf(), randf()) * ASTEROID_VELOCITY
 		add_child(asteroid)
 

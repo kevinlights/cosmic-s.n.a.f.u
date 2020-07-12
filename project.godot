@@ -34,6 +34,7 @@ config/icon="res://icon.png"
 [autoload]
 
 MusicManager="*res://music/MusicManager.tscn"
+GameState="*res://scripts/GameState.gd"
 
 [display]
 

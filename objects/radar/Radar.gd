@@ -54,6 +54,20 @@ func _draw() -> void:
 		pos_relative_to_ship = pos_relative_to_ship.rotated(-player_ship.rotation)
 		pos_relative_to_ship *= SCALING[zoom_level]
 		draw_texture_rect_region(Icons, Rect2(pos_relative_to_ship - Vector2(8, 8), Vector2(16, 16)), Rect2(16, 16*zoom_level, 16, 16))
+	# Draw missiles (ew, copy paste)
+	if zoom_level < 2:
+		for missile in get_tree().get_nodes_in_group("player_missile"):
+			var pos_relative_to_ship : Vector2 = missile.position - player_ship.position
+			pos_relative_to_ship = Vector2(
+				wrapf(pos_relative_to_ship.x, -256.0, 256.0),
+				wrapf(pos_relative_to_ship.y, -256.0, 256.0)
+			)
+			# Is it out of range?
+			if pos_relative_to_ship.length() > RADAR_RANGE[zoom_level]:
+				continue
+			pos_relative_to_ship = pos_relative_to_ship.rotated(-player_ship.rotation)
+			pos_relative_to_ship *= SCALING[zoom_level]
+			draw_texture_rect_region(Icons, Rect2(pos_relative_to_ship - Vector2(8, 8), Vector2(16, 16)), Rect2(16, 16*(zoom_level+1), 16, 16))
 
 func update_radar():
 	update()

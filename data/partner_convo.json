@@ -13,6 +13,26 @@
 	},
 	"questions": [
 		{
+			"type": "greeting",
+			"line": "Hey babe! <3",
+			"answers": [
+				"New phone, who dis?",
+				"Hi sweetie, how are you?",
+				"Oh god, please not now."
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "greeting",
+			"line": "Heya. More asteroids today?",
+			"answers": [
+				"Yes, and if you don't stop texting I'll fly into one on purpose.",
+				"Damn, I thought I wouldn't get any signal out here.",
+				"'Fraid so. You okay? <3"
+			],
+			"correct_answer": 2
+		},
+		{
 			"type": "random",
 			"line": "So, you remember my ex? Kept trying to call me earlier.",
 			"answers": [
@@ -24,13 +44,93 @@
 		},
 		{
 			"type": "random",
+			"line": "Be honest. Do you think I've gained weight?",
+			"answers": [
+				"No.",
+				"Yes.",
+				"OH GOD I'M SURROUNDED BY ASTEROIDS! Ask me again later."
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "random",
+			"line": "Hey, you know what I was thinking?",
+			"answers": [
+				"I never do.",
+				"Yes! ... No. -_-",
+				"Wait, do we have telepathy and you never told me!? :P"
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "random",
+			"line": "We should spend more time together.",
+			"answers": [
+				"It's not you, it's me.",
+				"Like- together, together?",
+				"GalaxyFlix and chill?"
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "random",
 			"line": "Can you believe they DELAYED the release for Stellar Conflict Episode 28??? AGAIN!?",
 			"answers": [
 				"I know, right!?",
 				"I can't believe you're still watching that crap.",
-				"Oh darn, I won't have to deal with you raging about the lore for a little while yet. How will I cope."
+				"Oh darn, you can't talk my ear off about it yet. How will I cope."
 			],
 			"correct_answer": 0
+		},
+		{
+			"type": "random",
+			"line": "<3",
+			"answers": [
+				"Less than 3 what??",
+				"<3",
+				"Please, for the love of god, get a hobby."
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "random",
+			"line": "What are you doing right now? :)",
+			"answers": [
+				"Googling 'how to dispose of a body'.",
+				"Nothing.",
+				"Making my way back home to you. <3"
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "random",
+			"line": "We should get a cat!",
+			"answers": [
+				"Right, because the the plutonian cave crab just wasn't enough.",
+				"ARE YOU SERIOUS!?",
+				"That is a great idea!"
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "random",
+			"line": "If you got a flat tire in space.. how would you fill it back up?",
+			"answers": [
+				"There are literally, quite literally, NO CARS IN SPACE!",
+				"That is a really good question.",
+				"Let you talk into it for five minutes? Plenty of hot air there."
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "random",
+			"line": "I can't find the nail clippers.",
+			"answers": [
+				"Oh, maybe you should put things back when you're done using them!",
+				"I stole them. Nyeh.",
+				"Bathroom, left of the sink, third drawer down."
+			],
+			"correct_answer": 2
 		},
 		{
 			"type": "detail",
@@ -55,11 +155,44 @@
 			"correct_answer": 0
 		},
 		{
+			"type": "detail",
+			"detail_index": 2,
+			"line": "Holy crap! The longest wedding veil ever was 63 and a half football fields!!",
+			"answers": [
+				"I think that's 63 and a half, too many.",
+				"Can you imagine? xD",
+				"I don't care."
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "detail",
+			"detail_index": 3,
+			"line": "{PLAYER_ENDEARMENT}, one of the drawers in the bathroom is broken.",
+			"answers": [
+				"I'll fix it when I get home.",
+				"And you're telling me, why?",
+				"Well hey, don't stop at 1!!"
+			],
+			"correct_answer": 0
+		},
+		{
+			"type": "detail",
+			"detail_index": 4,
+			"line": "Don't forget, it's my sister's birthday this weekend!",
+			"answers": [
+				"And, why do we celebrate that?",
+				"Can't wait!",
+				"Oh goody."
+			],
+			"correct_answer": 1
+		},
+		{
 			"type": "reflection_prompt",
 			"line": "Are you paying attention? I feel like you're ignoring me.",
 			"answers": [
 				"Oh, I'm sorry, I'm a bit busy FLYING A SPACESHIP RIGHT NOW.",
-				"I think you have the wrong number. Were you trying to text We Give a Shit LTD?",
+				"Trying my best to.",
 				"Of course! I would never ignore you."
 			],
 			"correct_answer": 2
@@ -73,6 +206,16 @@
 				"You could use the exercise, noodlearms."
 			],
 			"correct_answer": 1
+		},
+		{
+			"type": "reflection_prompt",
+			"line": "Busy??",
+			"answers": [
+				"I'm never too busy for you. <3",
+				"Yes.",
+				"How are you not fired yet?"
+			],
+			"correct_answer": 0
 		},
 		{
 			"type": "reflection",
@@ -97,6 +240,39 @@
 			"correct_answer": 0
 		},
 		{
+			"type": "reflection",
+			"detail_index": 2,
+			"line": "Ok then, how long was the wedding veil?",
+			"answers": [
+				"I already know, but I wanna make sure YOU know. So how long was it?",
+				"Less then 63.6 football fields long.",
+				"What wedding veil??"
+			],
+			"correct_answer": 1
+		},
+		{
+			"type": "reflection",
+			"detail_index": 3,
+			"line": "Seriously {PLAYER_ENDEARMENT}, that drawer is so annoying.",
+			"answers": [
+				"Yea I know right? I can never find a fork.",
+				"What drawer?",
+				"You both should call a truce for now, lol."
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "reflection",
+			"detail_index": 4,
+			"line": "So, what should we buy for the party this weekend?",
+			"answers": [
+				"Party stuff of course!",
+				"We can't go to a party this weekend! We have that.. Other thing?",
+				"I think you should decide, you know her best!"
+			],
+			"correct_answer": 2
+		},
+		{
 			"type": "reflection_win",
 			"line": "Okay, I guess you were paying attention. <3",
 			"answers": [
@@ -105,6 +281,26 @@
 				"Oh goody, I'm not single yet, then."
 			],
 			"correct_answer": 0
+		},
+		{
+			"type": "reflection_win",
+			"line": "See, this is why I love you.",
+			"answers": [
+				"Woaa. So we're using the L word?",
+				"#IAmTheBest",
+				"I love you too. :)"
+			],
+			"correct_answer": 2
+		},
+		{
+			"type": "reflection_win",
+			"line": "No way, you remembered!",
+			"answers": [
+				"I was right!? YES!",
+				"{PARTNER_ENDEARMENT}, I value each and every thing you say to me.",
+				"I mean, my odds were 1 out of 3."
+			],
+			"correct_answer": 1
 		},
 		{
 			"type": "reflection_win",

@@ -9,6 +9,7 @@ onready var ingame_tracks = {
 	"power": $BGM_InGame/Power,
 	"steering": $BGM_InGame/Steering,
 	"radar": $BGM_InGame/Radar,
+	"phone": $BGM_InGame/Phone,
 	"drums": $BGM_InGame/Drums
 }
 

@@ -71,6 +71,7 @@ __meta__ = {
 }
 
 [node name="Label_NoSignal" type="Label" parent="."]
+visible = false
 modulate = Color( 0.407843, 0.498039, 0.541176, 1 )
 material = SubResource( 2 )
 anchor_left = 0.5

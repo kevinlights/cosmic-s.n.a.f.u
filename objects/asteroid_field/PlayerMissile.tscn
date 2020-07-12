@@ -5,7 +5,9 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 4.0
 
-[node name="PlayerMissile" type="Area2D"]
+[node name="PlayerMissile" type="Area2D" groups=[
+"player_missile",
+]]
 script = ExtResource( 1 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -46,6 +46,7 @@ func _physics_process(delta : float) -> void:
 
 func fire_missile() -> void:
 	var missile = Missile.instance()
+	missile.global_position = global_position
 	missile.velocity = Vector2.RIGHT.rotated(rotation) * MISSILE_SPEED
 	get_parent().add_child(missile)
 

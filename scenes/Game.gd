@@ -1,11 +1,13 @@
 extends Node
 
 onready var asteroid_field = $AsteroidField
+onready var phone_system = $PhoneSystem
+onready var shaker = $Shaker
 onready var cockpit = $Shaker/Cockpit
 onready var radar = $Shaker/Radar
 onready var energy_system = $Shaker/EnergySystem
 onready var radio = $Shaker/Radio
-onready var shaker = $Shaker
+onready var phone = $Shaker/Phone
 onready var starfield = $Starfield
 
 const ENERGY_SYSTEM_UPDATE_TIME : float = 0.25
@@ -49,6 +51,12 @@ func go_to_radio() -> void:
 	radio.show()
 	MusicManager.switch_to_track("radar")
 
+func go_to_phone() -> void:
+	cockpit.hide()
+	phone.show()
+	phone.appear()
+	MusicManager.switch_to_track("phone")
+
 func back_from_radar() -> void:
 	radar.hide()
 	cockpit.show()
@@ -61,6 +69,11 @@ func back_from_energy_system() -> void:
 
 func back_from_radio() -> void:
 	radio.hide()
+	cockpit.show()
+	MusicManager.switch_to_track("main")
+
+func back_from_phone() -> void:
+	phone.hide()
 	cockpit.show()
 	MusicManager.switch_to_track("main")
 
@@ -201,11 +214,34 @@ func ship_hit_by_asteroid() -> void:
 	MusicManager.increase_pitch()
 	MusicManager.set_drums(true)
 	if health <= 0:
+		GameState.game_over_reason = GameState.GameOverReason.SHIP_DESTROYED
 		MusicManager.stop_music_suddenly()
 		get_tree().change_scene("res://scenes/GameOver.tscn")
 
 func fire_missile() -> void:
 	asteroid_field.player_ship.fire_missile()
+
+func _new_message_received(index : int) -> void:
+	var body : String = phone_system.get_message_body(index)
+	var responses : Array = phone_system.get_message_responses(index)
+	phone.set_message_body(body)
+	phone.set_responses(responses)
+	cockpit.set_phone_active(true)
+	print("VRRR!") # TODO: actual sound effect
+
+func response_sent(which_response : int) -> void:
+	cockpit.set_phone_active(false)
+	phone_system.evaluate_response(which_response)
+
+func _too_many_wrong_answers():
+	GameState.game_over_reason = GameState.GameOverReason.TOO_MANY_WRONG_ANSWERS
+	MusicManager.stop_music_suddenly()
+	get_tree().change_scene("res://scenes/GameOver.tscn")
+
+func _message_response_timeout():
+	GameState.game_over_reason = GameState.GameOverReason.RESPONSE_TIMEOUT
+	MusicManager.stop_music_suddenly()
+	get_tree().change_scene("res://scenes/GameOver.tscn")
 
 func _process(delta : float) -> void:
 	# Shake it, baby
@@ -219,6 +255,8 @@ func _process(delta : float) -> void:
 
 func start_game() -> void:
 	randomize()
+	cockpit.set_phone_active(false)
+	phone_system.start_system()
 	health = 3
 	for i in range(0, connections.size()):
 		battery_charge_levels[i] = (randf() + 1.0) / 2.0
@@ -229,11 +267,14 @@ func _ready() -> void:
 	cockpit.connect("go_to_radar", self, "go_to_radar")
 	cockpit.connect("go_to_energy_system", self, "go_to_energy_system")
 	cockpit.connect("go_to_radio", self, "go_to_radio")
+	cockpit.connect("go_to_phone", self, "go_to_phone")
 	radar.connect("back_from_radar", self, "back_from_radar")
 	radar.connect("fire_missile", self, "fire_missile")
 	radar.connect("shield_toggled", self, "shield_toggled")
 	energy_system.connect("back_from_energy_system", self, "back_from_energy_system")
 	radio.connect("back_from_radio", self, "back_from_radio")
+	phone.connect("response_sent", self, "response_sent")
+	phone.connect("back_from_phone", self, "back_from_phone")
 	asteroid_field.player_ship.connect("hit_by_asteroid", self, "ship_hit_by_asteroid")
 	asteroid_field.player_ship.connect("asteroid_hit_shield", self, "asteroid_hit_shield")
 	radar.asteroid_field = asteroid_field
