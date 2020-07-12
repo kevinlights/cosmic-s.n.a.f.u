@@ -37,7 +37,7 @@
 			"line": "So, you remember my ex? Kept trying to call me earlier.",
 			"answers": [
 				"Sounds like Stockholm Syndrome to me.",
-				"Ignore 'em, {PARTNER_ENDEARMENT}! You're in a better place now!",
+				"Ignore 'em, babe! You're in a better place now!",
 				"Why didn't you answer? Could've talked someone else's ear off than mine."
 			],
 			"correct_answer": 1
@@ -168,7 +168,7 @@
 		{
 			"type": "detail",
 			"detail_index": 3,
-			"line": "{PLAYER_ENDEARMENT}, one of the drawers in the bathroom is broken.",
+			"line": "Babe, one of the drawers in the bathroom is broken.",
 			"answers": [
 				"I'll fix it when I get home.",
 				"And you're telling me, why?",
@@ -199,9 +199,9 @@
 		},
 		{
 			"type": "reflection_prompt",
-			"line": "{PLAYER_ENDEARMENT}, my shoulders are numb from CARRYING THIS CONVERSATION. Are you even there???",
+			"line": "Babe, my shoulders are numb from CARRYING THIS CONVERSATION. Are you even there???",
 			"answers": [
-				"Jesus, {PARTNER_ENDEARMENT}, I'm flying through asteroids! Can't this wait?",
+				"Jesus, I'm flying through asteroids! Can't this wait?",
 				"I'm here!",
 				"You could use the exercise, noodlearms."
 			],
@@ -253,7 +253,7 @@
 		{
 			"type": "reflection",
 			"detail_index": 3,
-			"line": "Seriously {PLAYER_ENDEARMENT}, that drawer is so annoying.",
+			"line": "Seriously, babe, that drawer is so annoying.",
 			"answers": [
 				"Yea I know right? I can never find a fork.",
 				"What drawer?",
@@ -297,7 +297,7 @@
 			"line": "No way, you remembered!",
 			"answers": [
 				"I was right!? YES!",
-				"{PARTNER_ENDEARMENT}, I value each and every thing you say to me.",
+				"Babe, I value each and every thing you say to me. <3",
 				"I mean, my odds were 1 out of 3."
 			],
 			"correct_answer": 1
@@ -306,8 +306,8 @@
 			"type": "reflection_win",
 			"line": "You've got a good memory, at least.",
 			"answers": [
-				"And remarkably poor judgement, given my choice of {PARTNER_TYPE}.",
-				"Oh, you're one to talk, {PARTNER_TITLE} Anniversary Gift.",
+				"And remarkably poor judgement, given my choice of partner.",
+				"That, or enough luck not to whiff a one-in-three chance.",
 				"One of my many redeeming qualities. ;)"
 			],
 			"correct_answer": 2

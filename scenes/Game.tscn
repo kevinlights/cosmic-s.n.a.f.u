@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://objects/radar/Radar.tscn" type="PackedScene" id=2]
@@ -15,6 +15,9 @@
 [ext_resource path="res://sound/weapon_ready.ogg" type="AudioStream" id=13]
 [ext_resource path="res://sound/shield_recharged.ogg" type="AudioStream" id=14]
 [ext_resource path="res://sound/hit_by_asteroid.ogg" type="AudioStream" id=15]
+[ext_resource path="res://sound/battery_recharged.ogg" type="AudioStream" id=16]
+[ext_resource path="res://sound/battery_drained.ogg" type="AudioStream" id=17]
+[ext_resource path="res://sound/shield_hit.ogg" type="AudioStream" id=18]
 
 [node name="Game" type="Node" groups=[
 "game",
@@ -76,6 +79,14 @@ stream = ExtResource( 11 )
 volume_db = -5.0
 bus = "Ambience"
 
+[node name="Audio_BatteryDrained" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 17 )
+bus = "SFX"
+
+[node name="Audio_BatteryReplaced" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 16 )
+bus = "SFX"
+
 [node name="Audio_HitByAsteroid" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 15 )
 bus = "SFX"
@@ -83,6 +94,10 @@ bus = "SFX"
 [node name="Audio_MissileHitAsteroid" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 12 )
 volume_db = 5.0
+bus = "SFX"
+
+[node name="Audio_ShieldHit" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 18 )
 bus = "SFX"
 
 [node name="Audio_ShieldRecharged" type="AudioStreamPlayer" parent="SFX"]

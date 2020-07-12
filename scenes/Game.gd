@@ -11,8 +11,11 @@ onready var phone = $Shaker/Phone
 onready var starfield = $Starfield
 
 onready var audio_ambience = $SFX/Audio_Ambience
+onready var audio_battery_drained = $SFX/Audio_BatteryDrained
+onready var audio_battery_replaced = $SFX/Audio_BatteryReplaced
 onready var audio_hit_by_asteroid = $SFX/Audio_HitByAsteroid
 onready var audio_missile_hit_asteroid = $SFX/Audio_MissileHitAsteroid
+onready var audio_shield_hit = $SFX/Audio_ShieldHit
 onready var audio_shield_recharged = $SFX/Audio_ShieldRecharged
 onready var audio_weapon_ready = $SFX/Audio_WeaponReady
 onready var audio_weapon_fire = $SFX/Audio_WeaponFire
@@ -170,11 +173,13 @@ func _update_energy_system() -> void:
 					if battery_charge_levels[i] < 0.0:
 						battery_state[i] = BatteryState.DEAD
 						set_connection(i, -1)
+						audio_battery_drained.play()
 			BatteryState.CHANGING:
 				battery_replacement_progress[i] += BATTERY_REPLACE_RATE * ENERGY_SYSTEM_UPDATE_TIME
 				if battery_replacement_progress[i] >= 1.0:
 					battery_state[i] = BatteryState.ON
 					battery_charge_levels[i] = 1.0
+					audio_battery_replaced.play()
 	energy_system.update_battery_indicators()
 	energy_system.refresh_component_alerts()
 	energy_system.update()
@@ -230,6 +235,8 @@ func set_shields_up() -> void:
 func asteroid_hit_shield(which_shield : int) -> void:
 	shield_state[which_shield] = ShieldState.CHARGING
 	shield_recharge_rate[which_shield] = 0.0
+	audio_shield_hit.play()
+	shake_amount += 0.25
 
 func shield_toggled(which_shield : int) -> void:
 	if shield_state[which_shield] == ShieldState.ON:
@@ -240,7 +247,7 @@ func shield_toggled(which_shield : int) -> void:
 	radar.shield_indicator.update()
 
 func ship_hit_by_asteroid() -> void:
-	shake_amount = 1.0
+	shake_amount += 1.0
 	health -= 1
 	audio_hit_by_asteroid.play()
 	MusicManager.increase_pitch()

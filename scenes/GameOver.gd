@@ -2,6 +2,7 @@ extends Control
 
 onready var label_quip = $Label_Quip
 onready var tween = $Tween
+onready var audio_ship_destroyed = $Audio_ShipDestroyed
 
 const quips : Dictionary = {
 	GameState.GameOverReason.SHIP_DESTROYED: [
@@ -21,6 +22,9 @@ const quips : Dictionary = {
 
 func _ready() -> void:
 	randomize()
+	# Johnny wants big boom.
+	if GameState.game_over_reason == GameState.GameOverReason.SHIP_DESTROYED:
+		audio_ship_destroyed.play()
 	label_quip.text = quips[GameState.game_over_reason][rand_range(0, quips[GameState.game_over_reason].size())]
 	tween.interpolate_property(self, "modulate", Color.black, Color.white, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT, 1.0)
 	tween.start()

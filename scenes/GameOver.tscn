@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/GameOver.gd" type="Script" id=1]
 [ext_resource path="res://fonts/computer.tres" type="DynamicFont" id=2]
 [ext_resource path="res://fonts/other.tres" type="DynamicFont" id=3]
 [ext_resource path="res://sprites/menu_buttons.png" type="Texture" id=4]
+[ext_resource path="res://sound/ship_destroyed.ogg" type="AudioStream" id=5]
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 4 )
@@ -69,4 +70,9 @@ __meta__ = {
 }
 
 [node name="Tween" type="Tween" parent="."]
+
+[node name="Audio_ShipDestroyed" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+pitch_scale = 0.75
+bus = "SFX"
 [connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]

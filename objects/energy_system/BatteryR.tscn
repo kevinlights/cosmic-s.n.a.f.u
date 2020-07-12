@@ -1,8 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://fonts/computer.tres" type="DynamicFont" id=1]
 [ext_resource path="res://sprites/energy_icons.png" type="Texture" id=2]
 [ext_resource path="res://objects/energy_system/Battery.gd" type="Script" id=3]
+[ext_resource path="res://sound/computer_hover.ogg" type="AudioStream" id=4]
+[ext_resource path="res://sound/computer_select3.ogg" type="AudioStream" id=5]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -108,7 +110,16 @@ margin_bottom = 16.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="Audio_Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "UI"
+
+[node name="Audio_Select" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+bus = "UI"
 [connection signal="mouse_entered" from="Button_Select" to="." method="_on_Button_Select_mouse_entered"]
 [connection signal="mouse_exited" from="Button_Select" to="." method="_on_Button_Select_mouse_exited"]
 [connection signal="pressed" from="Button_Select" to="." method="_on_Button_Select_pressed"]
+[connection signal="mouse_entered" from="Button_Refresh" to="." method="_on_Button_Refresh_mouse_entered"]
 [connection signal="pressed" from="Button_Refresh" to="." method="_on_Button_Refresh_pressed"]

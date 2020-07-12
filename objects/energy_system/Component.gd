@@ -7,6 +7,7 @@ onready var alert_l = $AlertL
 onready var alert_r = $AlertR
 onready var connector_l = $ConnectorL
 onready var connector_r = $ConnectorR
+onready var audio_hover = $Audio_Hover
 
 signal component_selected
 
@@ -22,7 +23,7 @@ func update_icon() -> void:
 	button.texture_hover.region.position.x = (1 + which_component) * 32
 	button.texture_pressed.region.position.x = (1 + which_component) * 32
 	
-func _blink_alerts():
+func _blink_alerts() -> void:
 	for alert in [alert_l, alert_r]:
 		if alert.modulate == Color.white:
 			alert.modulate = Color.transparent
@@ -32,5 +33,8 @@ func _blink_alerts():
 func _ready() -> void:
 	update_icon()
 
-func _on_Button_pressed():
+func _on_Button_pressed() -> void:
 	emit_signal("component_selected", which_component)
+
+func _on_Button_mouse_entered() -> void:
+	audio_hover.play()

@@ -19,6 +19,8 @@ onready var components : Array = [
 	$Components/Component3
 ]
 
+onready var audio_connected = $Audio_Connected
+
 var selected_battery : int = -1
 var selected_component : int = -1
 
@@ -40,6 +42,7 @@ func component_selected(which_component : int) -> void:
 		batteries[selected_battery].deselect()
 		selected_battery = -1
 		update()
+		audio_connected.play()
 
 func battery_change_started(which_battery : int) -> void:
 	game.start_changing_battery(which_battery)
