@@ -25,36 +25,39 @@ var radio_frequency : float = 0.5
 
 var signal_strength : float = 0.5
 
+var health : int = 3
+
 var shake_amount : float = 0.0
 
 func go_to_radar() -> void:
 	cockpit.hide()
 	radar.show()
-	MusicManager.change_music("steering")
+	MusicManager.switch_to_track("steering")
 
 func go_to_energy_system() -> void:
 	cockpit.hide()
 	energy_system.show()
+	MusicManager.switch_to_track("power")
 
 func go_to_radio() -> void:
 	cockpit.hide()
 	radio.show()
-	MusicManager.change_music("radar")
+	MusicManager.switch_to_track("radar")
 
 func back_from_radar() -> void:
 	radar.hide()
 	cockpit.show()
-	MusicManager.change_music("main")
+	MusicManager.switch_to_track("main")
 
 func back_from_energy_system() -> void:
 	energy_system.hide()
 	cockpit.show()
-	MusicManager.change_music("main")
+	MusicManager.switch_to_track("main")
 
 func back_from_radio() -> void:
 	radio.hide()
 	cockpit.show()
-	MusicManager.change_music("main")
+	MusicManager.switch_to_track("main")
 
 func do_connections_overlap(battery_a : int, component_a : int, battery_b : int, component_b : int) -> bool:
 	# If the two batteries or the two components are the same, the connections cannot overlap
@@ -149,6 +152,10 @@ func _update_radio() -> void:
 
 func ship_hit_by_asteroid() -> void:
 	shake_amount = 1.0
+	health -= 1
+	if health <= 0:
+		MusicManager.stop_music_suddenly()
+		get_tree().change_scene("res://scenes/GameOver.tscn")
 
 func _process(delta : float) -> void:
 	# Shake it, baby
@@ -162,6 +169,7 @@ func _process(delta : float) -> void:
 
 func start_game() -> void:
 	randomize()
+	health = 3
 	for i in range(0, connections.size()):
 		battery_charge_levels[i] = (randf() + 1.0) / 2.0
 		battery_drain_rates[i] = (randf() + 1.0) / 100.0
