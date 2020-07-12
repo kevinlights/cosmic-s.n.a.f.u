@@ -161,7 +161,7 @@ func create_message_index() -> void:
 
 func load_messages() -> void:
 	var f : File = File.new()
-	f.open("res://data/partner_convo.json", File.READ)
+	f.open("res://data/partner_convo.tres", File.READ)
 	var contents : String = f.get_as_text()
 	var json = parse_json(contents)
 	messages = json["questions"]
