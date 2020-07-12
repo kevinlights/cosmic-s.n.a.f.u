@@ -58,6 +58,9 @@ func update_radar():
 	button_zoom_in.visible = game.signal_is_good()
 	button_zoom_out.visible = game.signal_is_good()
 
+func _fire_missile() -> void:
+	game.fire_missile()
+
 func _zoom_out():
 	zoom_level = clamp(zoom_level + 1, 0, 2)
 	update()

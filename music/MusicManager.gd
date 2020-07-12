@@ -42,7 +42,6 @@ func stop_music_suddenly() -> void:
 		ingame_tracks[track_name].stop()
 
 func start_music() -> void:
-	
 	for track_name in ingame_tracks:
 		if track_name == "main":
 			ingame_tracks[track_name].volume_db = 0.0

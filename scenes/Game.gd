@@ -158,6 +158,9 @@ func ship_hit_by_asteroid() -> void:
 		MusicManager.stop_music_suddenly()
 		get_tree().change_scene("res://scenes/GameOver.tscn")
 
+func fire_missile() -> void:
+	asteroid_field.player_ship.fire_missile()
+
 func _process(delta : float) -> void:
 	# Shake it, baby
 	if shake_amount > 0.0:

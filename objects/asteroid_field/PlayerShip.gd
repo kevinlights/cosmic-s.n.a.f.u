@@ -2,8 +2,11 @@ extends Area2D
 
 class_name PlayerShip
 
+const Missile = preload("res://objects/asteroid_field/PlayerMissile.tscn")
+
 const TURNING_SPEED : float = 0.5
 const TURN_RANDOMISE_AMOUNT : float = 0.5
+const MISSILE_SPEED : float = 32.0
 
 var speed : float = 8.0
 var target_rotation : float = rotation
@@ -28,12 +31,15 @@ func _physics_process(delta : float) -> void:
 			wrapf(position.y, 0.0, AsteroidField.FIELD_BOUNDS.size.y)
 		)
 
+func fire_missile() -> void:
+	var missile = Missile.instance()
+	missile.velocity = Vector2.RIGHT.rotated(rotation) * MISSILE_SPEED
+	get_parent().add_child(missile)
+
 # Our rudder's on the blink! We're drifting!
-func _randomise_direction():
+func _randomise_direction() -> void:
 	target_rotation += (randf() - 0.5) * TURN_RANDOMISE_AMOUNT
 
-func _on_PlayerShip_body_entered(body):
+func _on_PlayerShip_body_entered(body : PhysicsBody2D) -> void:
 	if body.is_in_group("asteroid"):
 		hit_by_asteroid(body)
-
-
