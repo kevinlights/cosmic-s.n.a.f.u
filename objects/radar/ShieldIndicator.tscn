@@ -1,0 +1,75 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://sprites/shield_indicator.png" type="Texture" id=1]
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 1 )
+region = Rect2( 8, 8, 40, 40 )
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 56, 8 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 48, 56, 8 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 8, 56 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 1 )
+region = Rect2( 48, 0, 8, 56 )
+
+[node name="ShieldIndicator" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -584.0
+margin_bottom = -304.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture_Ship" type="TextureRect" parent="."]
+use_parent_material = true
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 48.0
+margin_bottom = 48.0
+texture = SubResource( 5 )
+
+[node name="Texture_Shield_Fore" type="TextureRect" parent="."]
+use_parent_material = true
+margin_right = 56.0
+margin_bottom = 8.0
+texture = SubResource( 1 )
+
+[node name="Texture_Shield_Aft" type="TextureRect" parent="."]
+use_parent_material = true
+margin_top = 48.0
+margin_right = 56.0
+margin_bottom = 56.0
+texture = SubResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture_Shield_Port" type="TextureRect" parent="."]
+use_parent_material = true
+margin_right = 8.0
+margin_bottom = 56.0
+texture = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Texture_Shield_Starboard" type="TextureRect" parent="."]
+use_parent_material = true
+margin_left = 48.0
+margin_right = 56.0
+margin_bottom = 56.0
+texture = SubResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

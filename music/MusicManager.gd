@@ -8,7 +8,8 @@ onready var ingame_tracks = {
 	"main": $BGM_InGame/Main,
 	"power": $BGM_InGame/Power,
 	"steering": $BGM_InGame/Steering,
-	"radar": $BGM_InGame/Radar
+	"radar": $BGM_InGame/Radar,
+	"drums": $BGM_InGame/Drums
 }
 
 onready var menu_track = $BGM_Menu
@@ -35,15 +36,19 @@ func switch_to_track(which_track : String) -> void:
 		var track = ingame_tracks[track_name]
 		if track_name == which_track:
 			tween_track.interpolate_property(track, "volume_db", track.volume_db, 0.0, FADE_TIME, Tween.TRANS_QUINT, Tween.EASE_OUT)
-		else:
+		elif track_name != "drums": # Drums are handled separately
 			tween_track.interpolate_property(track, "volume_db", track.volume_db, -60.0, FADE_TIME, Tween.TRANS_QUINT, Tween.EASE_IN)
 	tween_track.start()
+
+func set_drums(on : bool) -> void:
+	ingame_tracks["drums"].volume_db = 0.0 if on else -60.0
 
 func stop_music_suddenly() -> void:
 	for track_name in ingame_tracks:
 		ingame_tracks[track_name].stop()
 
 func start_music() -> void:
+	current_pitch = 0
 	for track_name in ingame_tracks:
 		if track_name == "main":
 			ingame_tracks[track_name].volume_db = 0.0

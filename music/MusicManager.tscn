@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://music/MusicManager.gd" type="Script" id=1]
 [ext_resource path="res://music/assets/menu.ogg" type="AudioStream" id=2]
 [ext_resource path="res://music/assets/steering.ogg" type="AudioStream" id=3]
+[ext_resource path="res://music/assets/drums.ogg" type="AudioStream" id=4]
 [ext_resource path="res://music/assets/main.ogg" type="AudioStream" id=5]
 [ext_resource path="res://music/assets/cooling.ogg" type="AudioStream" id=6]
 [ext_resource path="res://music/assets/radar.ogg" type="AudioStream" id=7]
@@ -26,6 +27,10 @@ bus = "BGM"
 
 [node name="Radar" type="AudioStreamPlayer" parent="BGM_InGame"]
 stream = ExtResource( 7 )
+bus = "BGM"
+
+[node name="Drums" type="AudioStreamPlayer" parent="BGM_InGame"]
+stream = ExtResource( 4 )
 bus = "BGM"
 
 [node name="BGM_Menu" type="AudioStreamPlayer" parent="."]

@@ -1,12 +1,13 @@
 [gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scenes/Game.gd" type="Script" id=1]
-[ext_resource path="res://objects/Radar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://objects/radar/Radar.tscn" type="PackedScene" id=2]
 [ext_resource path="res://objects/asteroid_field/AsteroidField.tscn" type="PackedScene" id=3]
 [ext_resource path="res://objects/energy_system/EnergySystem.tscn" type="PackedScene" id=4]
 [ext_resource path="res://objects/Cockpit.tscn" type="PackedScene" id=5]
 [ext_resource path="res://objects/Starfield.tscn" type="PackedScene" id=6]
 [ext_resource path="res://objects/radio/Radio.tscn" type="PackedScene" id=7]
+
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
