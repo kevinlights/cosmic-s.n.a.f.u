@@ -169,7 +169,7 @@ func _update_energy_system() -> void:
 		match battery_state[i]:
 			BatteryState.ON:
 				if is_battery_connected(i):
-					battery_charge_levels[i] -= battery_drain_rates[i] * ENERGY_SYSTEM_UPDATE_TIME
+					battery_charge_levels[i] -= (battery_drain_rates[i] * ENERGY_SYSTEM_UPDATE_TIME) / 3.0 # last minute desperate balancing act
 					if battery_charge_levels[i] < 0.0:
 						battery_state[i] = BatteryState.DEAD
 						set_connection(i, -1)

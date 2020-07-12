@@ -107,6 +107,7 @@ bus = "SFX"
 
 [node name="Audio_WeaponFire" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 10 )
+volume_db = -10.0
 bus = "SFX"
 
 [node name="Audio_WeaponReady" type="AudioStreamPlayer" parent="SFX"]
