@@ -5,11 +5,13 @@ const FADE_TIME : float = 0.8
 const PITCHES : Array = [1.0, 1.05946, 1.12246, 1.18921, 1.25992, 1.33484, 1.41421, 1.49831]
 
 onready var ingame_tracks = {
-	"main": $InGame/Main,
-	"power": $InGame/Power,
-	"steering": $InGame/Steering,
-	"radar": $InGame/Radar
+	"main": $BGM_InGame/Main,
+	"power": $BGM_InGame/Power,
+	"steering": $BGM_InGame/Steering,
+	"radar": $BGM_InGame/Radar
 }
+
+onready var menu_track = $BGM_Menu
 
 onready var tween_track = $Tween_Track
 onready var tween_tempo = $Tween_Tempo
@@ -49,3 +51,10 @@ func start_music() -> void:
 			ingame_tracks[track_name].volume_db = -60.0
 		ingame_tracks[track_name].pitch_scale = 1.0
 		ingame_tracks[track_name].play()
+
+func play_menu_music() -> void:
+	if not menu_track.playing:
+		menu_track.play()
+
+func stop_menu_music() -> void:
+	menu_track.stop()

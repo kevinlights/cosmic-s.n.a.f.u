@@ -12,4 +12,4 @@ dest_files=[ "res://.import/radar.ogg-012d2a4b501deeb98656cd86674a0bac.oggstr" ]
 [params]
 
 loop=true
-loop_offset=0.0
+loop_offset=5.334

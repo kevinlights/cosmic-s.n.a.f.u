@@ -12,4 +12,4 @@ dest_files=[ "res://.import/cooling.ogg-de5ce0dc54d0e4ccbff9570c6015c25c.oggstr"
 [params]
 
 loop=true
-loop_offset=0.0
+loop_offset=5.334
