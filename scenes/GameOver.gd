@@ -15,3 +15,5 @@ func _ready() -> void:
 	tween.interpolate_property(self, "modulate", Color.black, Color.white, 2.0, Tween.TRANS_LINEAR, Tween.EASE_OUT, 1.0)
 	tween.start()
 
+func _on_Button_Back_pressed():
+	get_tree().change_scene("res://scenes/TitleScreen.tscn")

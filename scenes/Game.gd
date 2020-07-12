@@ -153,6 +153,7 @@ func _update_radio() -> void:
 func ship_hit_by_asteroid() -> void:
 	shake_amount = 1.0
 	health -= 1
+	MusicManager.increase_pitch()
 	if health <= 0:
 		MusicManager.stop_music_suddenly()
 		get_tree().change_scene("res://scenes/GameOver.tscn")

@@ -64,5 +64,9 @@ margin_bottom = 144.0
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 2 )
 texture_hover = SubResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Tween" type="Tween" parent="."]
+[connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]
