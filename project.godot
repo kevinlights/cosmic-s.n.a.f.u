@@ -77,7 +77,6 @@ window/stretch/shrink=2.0
 
 enabled=PoolStringArray( "audio_booth" )
 
-
 [rendering]
 
 environment/default_environment="res://default_env.tres"
