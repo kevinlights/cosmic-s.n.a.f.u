@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/back.png" type="Texture" id=1]
 [ext_resource path="res://sprites/radar_icons.png" type="Texture" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://objects/radar/Radar.gd" type="Script" id=4]
 [ext_resource path="res://fonts/computer.tres" type="DynamicFont" id=5]
 [ext_resource path="res://objects/radar/ShieldIndicator.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/radar/WeaponSystem.tscn" type="PackedScene" id=7]
+[ext_resource path="res://sound/computer_hover.ogg" type="AudioStream" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -39,18 +41,6 @@ region = Rect2( 16, 0, 16, 16 )
 [sub_resource type="AtlasTexture" id=9]
 atlas = ExtResource( 2 )
 region = Rect2( 16, 16, 16, 16 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 32, 16 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 32, 16 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 48, 32, 16 )
 
 [node name="Radar" type="Control"]
 material = SubResource( 1 )
@@ -93,6 +83,12 @@ margin_top = 16.0
 margin_right = -80.0
 margin_bottom = -164.0
 
+[node name="Weapons" parent="." instance=ExtResource( 7 )]
+margin_left = 30.0
+margin_top = 54.0
+margin_right = 78.0
+margin_bottom = 114.0
+
 [node name="Button_ZoomOut" type="TextureButton" parent="."]
 material = SubResource( 3 )
 margin_left = 16.0
@@ -119,19 +115,6 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Button_Fire" type="TextureButton" parent="."]
-material = SubResource( 3 )
-margin_left = 16.0
-margin_top = 140.0
-margin_right = 48.0
-margin_bottom = 156.0
-texture_normal = SubResource( 10 )
-texture_pressed = SubResource( 11 )
-texture_hover = SubResource( 12 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="Button_Back" type="TextureButton" parent="."]
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -147,9 +130,15 @@ __meta__ = {
 [node name="Timer_Update" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="Audio_Hover" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+bus = "UI"
 [connection signal="shield_toggled" from="ShieldIndicator" to="." method="_shield_toggled"]
+[connection signal="fire_weapon" from="Weapons" to="." method="_fire_weapon"]
+[connection signal="mouse_entered" from="Button_ZoomOut" to="." method="_button_hovered"]
 [connection signal="pressed" from="Button_ZoomOut" to="." method="_zoom_out"]
+[connection signal="mouse_entered" from="Button_ZoomIn" to="." method="_button_hovered"]
 [connection signal="pressed" from="Button_ZoomIn" to="." method="_zoom_in"]
-[connection signal="pressed" from="Button_Fire" to="." method="_fire_missile"]
 [connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]
 [connection signal="timeout" from="Timer_Update" to="." method="update_radar"]

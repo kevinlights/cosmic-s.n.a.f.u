@@ -10,12 +10,22 @@ onready var radio = $Shaker/Radio
 onready var phone = $Shaker/Phone
 onready var starfield = $Starfield
 
+onready var audio_ambience = $SFX/Audio_Ambience
+onready var audio_hit_by_asteroid = $SFX/Audio_HitByAsteroid
+onready var audio_missile_hit_asteroid = $SFX/Audio_MissileHitAsteroid
+onready var audio_shield_recharged = $SFX/Audio_ShieldRecharged
+onready var audio_weapon_ready = $SFX/Audio_WeaponReady
+onready var audio_weapon_fire = $SFX/Audio_WeaponFire
+
 const ENERGY_SYSTEM_UPDATE_TIME : float = 0.25
 const BATTERY_REPLACE_RATE : float = 0.1
 const SIGNAL_THRESHOLD : float = 0.3
 const SHIELD_CHARGE_RATE : float = 0.25
 const SHIELDS_DELTA : float = 0.25
+const WEAPON_RECHARGE_RATE : float = 0.25
+const WEAPON_DELTA : float = 0.25
 
+enum ComponentType {Weapons, Radio, Shields}
 enum BatteryState {ON, DEAD, CHANGING}
 enum ShieldState {ON, OFF, CHARGING}
 
@@ -33,6 +43,9 @@ var signal_strength : float = 0.5
 var shield_state : Array = [ShieldState.ON, ShieldState.ON, ShieldState.ON, ShieldState.ON]
 var shield_recharge_rate : Array = [0.0, 0.0, 0.0, 0.0]
 var health : int = 3
+
+var weapon_ready : Array = [true, true]
+var weapon_recharge_progress : Array = [0.0, 0.0]
 
 var shake_amount : float = 0.0
 
@@ -130,6 +143,23 @@ func is_component_powered(component : int) -> bool:
 			power += 1
 	return power >= 2
 
+func get_battery_count_for_component(component : int) -> int:
+	var power : int = 0
+	for battery in range(0, connections.size()):
+		var connection : int = connections[battery]
+		if connection == component and is_battery_on(battery):
+			power += 1
+	return power
+
+func get_drain_on_battery(which_battery : int) -> float:
+	# What component is this battery powering?
+	var component : int = connections[which_battery]
+	var batteries_for_component : int = get_battery_count_for_component(component)
+	match component:
+		ComponentType.Shields:
+			return get_shields_power_drain() / float(batteries_for_component)
+	return 0.0
+
 func _update_energy_system() -> void:
 	# Drain the batteries
 	for i in range(0, battery_charge_levels.size()):
@@ -176,6 +206,7 @@ func _update_shields() -> void:
 				if shield_recharge_rate[i] >= 1.0:
 					shield_state[i] = ShieldState.ON
 					shield_recharge_rate[i] = 0
+					audio_shield_recharged.play()
 	set_shields_up()
 	radar.shield_indicator.update()
 
@@ -184,11 +215,11 @@ func get_shields_power_drain() -> float:
 	for i in range(0, shield_state.size()):
 		match shield_state[i]:
 			ShieldState.OFF:
-				result += 0.025
+				result += 0.0025
 			ShieldState.ON:
-				result += 0.1
+				result += 0.0125
 			ShieldState.CHARGING:
-				result += 0.5
+				result += 0.05
 	return result
 
 func set_shields_up() -> void:
@@ -211,6 +242,7 @@ func shield_toggled(which_shield : int) -> void:
 func ship_hit_by_asteroid() -> void:
 	shake_amount = 1.0
 	health -= 1
+	audio_hit_by_asteroid.play()
 	MusicManager.increase_pitch()
 	MusicManager.set_drums(true)
 	if health <= 0:
@@ -218,8 +250,28 @@ func ship_hit_by_asteroid() -> void:
 		MusicManager.stop_music_suddenly()
 		get_tree().change_scene("res://scenes/GameOver.tscn")
 
-func fire_missile() -> void:
+func fire_weapon(which_weapon : int) -> void:
+	# Is the weapon ready?
+	if not weapon_ready[which_weapon]:
+		return
+	# Pew pew!
 	asteroid_field.player_ship.fire_missile()
+	audio_weapon_fire.play()
+	weapon_ready[which_weapon] = false
+	weapon_recharge_progress[which_weapon] = 0.0
+
+func missile_destroyed_asteroid() -> void:
+	audio_missile_hit_asteroid.play()
+	GameState.asteroids_destroyed += 1
+
+func _update_weapons():
+	for i in range(0, weapon_ready.size()):
+		if not weapon_ready[i]:
+			weapon_recharge_progress[i] += WEAPON_RECHARGE_RATE * WEAPON_DELTA
+			if weapon_recharge_progress[i] >= 1.0:
+				weapon_ready[i] = true
+				audio_weapon_ready.play()
+	radar.weapons.update_indicators()
 
 func _new_message_received(index : int) -> void:
 	var body : String = phone_system.get_message_body(index)
@@ -227,7 +279,6 @@ func _new_message_received(index : int) -> void:
 	phone.set_message_body(body)
 	phone.set_responses(responses)
 	cockpit.set_phone_active(true)
-	print("VRRR!") # TODO: actual sound effect
 
 func response_sent(which_response : int) -> void:
 	cockpit.set_phone_active(false)
@@ -254,10 +305,12 @@ func _process(delta : float) -> void:
 	starfield.rect_position.x = (wrapf(-asteroid_field.player_ship.rotation / PI, 0.0, 1.0) * 640.0) - 640.0
 
 func start_game() -> void:
+	GameState.new_game()
 	randomize()
 	cockpit.set_phone_active(false)
 	phone_system.start_system()
 	health = 3
+	audio_ambience.play()
 	for i in range(0, connections.size()):
 		battery_charge_levels[i] = (randf() + 1.0) / 2.0
 		battery_drain_rates[i] = (randf() + 1.0) / 100.0
@@ -269,7 +322,7 @@ func _ready() -> void:
 	cockpit.connect("go_to_radio", self, "go_to_radio")
 	cockpit.connect("go_to_phone", self, "go_to_phone")
 	radar.connect("back_from_radar", self, "back_from_radar")
-	radar.connect("fire_missile", self, "fire_missile")
+	radar.connect("fire_weapon", self, "fire_weapon")
 	radar.connect("shield_toggled", self, "shield_toggled")
 	energy_system.connect("back_from_energy_system", self, "back_from_energy_system")
 	radio.connect("back_from_radio", self, "back_from_radio")
@@ -282,6 +335,7 @@ func _ready() -> void:
 	energy_system.game = self
 	radar.game = self
 	radar.shield_indicator.game = self
+	radar.weapons.game = self
 	radio.game = self
 	# Game on!
 	start_game()

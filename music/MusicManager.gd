@@ -36,13 +36,13 @@ func switch_to_track(which_track : String) -> void:
 	for track_name in ingame_tracks:
 		var track = ingame_tracks[track_name]
 		if track_name == which_track:
-			tween_track.interpolate_property(track, "volume_db", track.volume_db, 0.0, FADE_TIME, Tween.TRANS_QUINT, Tween.EASE_OUT)
+			tween_track.interpolate_property(track, "volume_db", track.volume_db, 5.0, FADE_TIME, Tween.TRANS_QUINT, Tween.EASE_OUT)
 		elif track_name != "drums": # Drums are handled separately
 			tween_track.interpolate_property(track, "volume_db", track.volume_db, -60.0, FADE_TIME, Tween.TRANS_QUINT, Tween.EASE_IN)
 	tween_track.start()
 
 func set_drums(on : bool) -> void:
-	ingame_tracks["drums"].volume_db = 0.0 if on else -60.0
+	ingame_tracks["drums"].volume_db = 5.0 if on else -60.0
 
 func stop_music_suddenly() -> void:
 	for track_name in ingame_tracks:
@@ -52,7 +52,7 @@ func start_music() -> void:
 	current_pitch = 0
 	for track_name in ingame_tracks:
 		if track_name == "main":
-			ingame_tracks[track_name].volume_db = 0.0
+			ingame_tracks[track_name].volume_db = 5.0
 		else:
 			ingame_tracks[track_name].volume_db = -60.0
 		ingame_tracks[track_name].pitch_scale = 1.0

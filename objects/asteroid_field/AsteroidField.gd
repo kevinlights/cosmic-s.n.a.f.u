@@ -11,6 +11,8 @@ const FIELD_BOUNDS : Rect2 = Rect2(0, 0, 512, 512)
 
 onready var player_ship = $PlayerShip
 
+var game
+
 func spawn_asteroids() -> void:
 	for i in range(0, ASTEROID_COUNT):
 		var asteroid = Asteroid.instance()

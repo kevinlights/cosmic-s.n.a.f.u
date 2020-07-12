@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/battery_drained.ogg-f9a16c4ee1bf31bcc4f71078b2b9c78a.oggstr"
+
+[deps]
+
+source_file="res://sound/battery_drained.ogg"
+dest_files=[ "res://.import/battery_drained.ogg-f9a16c4ee1bf31bcc4f71078b2b9c78a.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

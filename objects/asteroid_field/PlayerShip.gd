@@ -23,6 +23,8 @@ onready var collision_shape_shields : Array = [
 var speed : float = 8.0
 var target_rotation : float = rotation
 
+var game
+
 signal hit_by_asteroid
 signal asteroid_hit_shield
 

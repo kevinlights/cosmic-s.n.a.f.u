@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/ship_destroyed.ogg-42f75835725fb96fbbdca2bc80b1351f.oggstr"
+
+[deps]
+
+source_file="res://sound/ship_destroyed.ogg"
+dest_files=[ "res://.import/ship_destroyed.ogg-42f75835725fb96fbbdca2bc80b1351f.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

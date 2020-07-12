@@ -1,13 +1,18 @@
 extends Node
 
 const NEW_MESSAGE_DELAY : float = 25.0
-const RESPONSE_TIME_LIMIT : float = 15.0
+const RESPONSE_TIME_LIMIT : float = 18.0
 const WRONG_ANSWER_LIMIT : int = 3
 
 enum MessageType {GREETING, RANDOM, DETAIL, REFLECTION_PROMPT, REFLECTION, REFLECTION_WIN}
 
-onready var timer_ghosttimer = $Timer_GhostTimer
-onready var timer_newmessage = $Timer_NewMessage
+onready var timer_ghost_timer = $Timer_GhostTimer
+onready var timer_new_message = $Timer_NewMessage
+onready var timer_warning = $Timer_Warning
+onready var audio_vibrate = $Audio_Vibrate
+onready var audio_correct_answer = $Audio_CorrectAnswer
+onready var audio_wrong_answer = $Audio_WrongAnswer
+onready var audio_warning = $Audio_Warning
 
 var messages : Array # The deck of messages
 var message_index_of_type : Dictionary = {
@@ -98,29 +103,36 @@ func next_message() -> void:
 
 func evaluate_response(response_index : int) -> void:
 	if response_index == get_message_correct_response(current_message):
-		print("Right answer!")
+		audio_correct_answer.play()
 	else:
-		print("Wrong answer!") # todo: play sound effect
+		audio_wrong_answer.play()
 		wrong_answers += 1
 		if wrong_answers >= WRONG_ANSWER_LIMIT:
 			emit_signal("too_many_wrong_answers")
 	# Set up for the next message
 	message_awaiting_response = false
-	timer_ghosttimer.stop()
-	timer_newmessage.start(NEW_MESSAGE_DELAY)
+	timer_ghost_timer.stop()
+	timer_new_message.start(NEW_MESSAGE_DELAY)
+	timer_warning.stop()
+	audio_warning.stop()
 
 func start_system() -> void:
 	message_awaiting_response = false
-	timer_newmessage.start(NEW_MESSAGE_DELAY)
+	timer_new_message.start(NEW_MESSAGE_DELAY)
 
 # When this passes, the player has gone too long without responding! Game over!
 func _on_Timer_GhostTimer_timeout() -> void:
 	emit_signal("response_timeout")
 
+func _on_Timer_Warning_timeout() -> void:
+	audio_warning.play()
+
 func _on_Timer_NewMessage_timeout() -> void:
 	message_awaiting_response = true
-	timer_ghosttimer.start(RESPONSE_TIME_LIMIT)
+	timer_ghost_timer.start(RESPONSE_TIME_LIMIT)
+	timer_warning.start(RESPONSE_TIME_LIMIT - 10.0)
 	next_message()
+	audio_vibrate.play()
 
 func create_message_index() -> void:
 	# Clear the indexes first

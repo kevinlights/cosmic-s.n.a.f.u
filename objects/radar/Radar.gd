@@ -7,6 +7,9 @@ onready var label_no_signal = $Label_NoSignal
 onready var button_zoom_out = $Button_ZoomOut
 onready var button_zoom_in = $Button_ZoomIn
 onready var shield_indicator = $ShieldIndicator
+onready var weapons = $Weapons
+
+onready var audio_hover = $Audio_Hover
 
 const COLOUR_HUD = Color("687f8a")
 
@@ -22,7 +25,7 @@ var game
 var zoom_level : int = 1
 
 signal back_from_radar
-signal fire_missile
+signal fire_weapon
 signal shield_toggled
 
 # Why doesn't Godot have this built in!?
@@ -75,11 +78,11 @@ func update_radar():
 	button_zoom_in.visible = game.signal_is_good()
 	button_zoom_out.visible = game.signal_is_good()
 
-func _fire_missile() -> void:
-	emit_signal("fire_missile")
-
 func _shield_toggled(which : int) -> void:
 	emit_signal("shield_toggled", which)
+
+func _fire_weapon(which_weapon : int) -> void:
+	emit_signal("fire_weapon", which_weapon)
 
 func _zoom_out():
 	zoom_level = clamp(zoom_level + 1, 0, 2)
@@ -93,3 +96,6 @@ func _zoom_in():
 
 func _on_Button_Back_pressed():
 	emit_signal("back_from_radar")
+
+func _button_hovered():
+	audio_hover.play()

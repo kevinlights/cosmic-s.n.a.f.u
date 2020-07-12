@@ -2,6 +2,8 @@ extends Area2D
 
 var velocity : Vector2
 
+var game
+
 func _physics_process(delta : float) -> void:
 	position += velocity * delta
 	position = Vector2(
@@ -11,9 +13,9 @@ func _physics_process(delta : float) -> void:
 
 func _on_PlayerMissile_body_entered(body):
 	if body.is_in_group("asteroid"):
-		print("Boom!")
+		get_tree().call_group("game", "missile_destroyed_asteroid") # janky hack
 		body.queue_free()
 		self.queue_free()
 
 func _on_Timer_Despawn_timeout():
-	print("Missile despawned without hitting anything.")
+	queue_free()

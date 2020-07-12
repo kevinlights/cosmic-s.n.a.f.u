@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/phone_vibrate.ogg-9f56fe38fe8cc2257ffb69218012ad2e.oggstr"
+
+[deps]
+
+source_file="res://sound/phone_vibrate.ogg"
+dest_files=[ "res://.import/phone_vibrate.ogg-9f56fe38fe8cc2257ffb69218012ad2e.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

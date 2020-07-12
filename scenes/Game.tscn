@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://scenes/Game.gd" type="Script" id=1]
 [ext_resource path="res://objects/radar/Radar.tscn" type="PackedScene" id=2]
@@ -9,8 +9,16 @@
 [ext_resource path="res://objects/radio/Radio.tscn" type="PackedScene" id=7]
 [ext_resource path="res://objects/PhoneSystem.tscn" type="PackedScene" id=8]
 [ext_resource path="res://objects/phone/Phone.tscn" type="PackedScene" id=9]
+[ext_resource path="res://sound/weapon_fire.ogg" type="AudioStream" id=10]
+[ext_resource path="res://sound/ambience.ogg" type="AudioStream" id=11]
+[ext_resource path="res://sound/asteroid_destroyed.ogg" type="AudioStream" id=12]
+[ext_resource path="res://sound/weapon_ready.ogg" type="AudioStream" id=13]
+[ext_resource path="res://sound/shield_recharged.ogg" type="AudioStream" id=14]
+[ext_resource path="res://sound/hit_by_asteroid.ogg" type="AudioStream" id=15]
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" groups=[
+"game",
+]]
 script = ExtResource( 1 )
 
 [node name="PhoneSystem" parent="." instance=ExtResource( 8 )]
@@ -56,9 +64,44 @@ autostart = true
 [node name="Timer_UpdateShields" type="Timer" parent="."]
 wait_time = 0.25
 autostart = true
+
+[node name="Timer_UpdateWeapons" type="Timer" parent="."]
+wait_time = 0.25
+autostart = true
+
+[node name="SFX" type="Node" parent="."]
+
+[node name="Audio_Ambience" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 11 )
+volume_db = -5.0
+bus = "Ambience"
+
+[node name="Audio_HitByAsteroid" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 15 )
+bus = "SFX"
+
+[node name="Audio_MissileHitAsteroid" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 12 )
+volume_db = 5.0
+bus = "SFX"
+
+[node name="Audio_ShieldRecharged" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 14 )
+volume_db = -10.0
+bus = "SFX"
+
+[node name="Audio_WeaponFire" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 10 )
+bus = "SFX"
+
+[node name="Audio_WeaponReady" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource( 13 )
+volume_db = -10.0
+bus = "SFX"
 [connection signal="new_message_received" from="PhoneSystem" to="." method="_new_message_received"]
 [connection signal="response_timeout" from="PhoneSystem" to="." method="_message_response_timeout"]
 [connection signal="too_many_wrong_answers" from="PhoneSystem" to="." method="_too_many_wrong_answers"]
 [connection signal="timeout" from="Timer_UpdateEnergySystem" to="." method="_update_energy_system"]
 [connection signal="timeout" from="Timer_UpdateRadio" to="." method="_update_radio"]
 [connection signal="timeout" from="Timer_UpdateShields" to="." method="_update_shields"]
+[connection signal="timeout" from="Timer_UpdateWeapons" to="." method="_update_weapons"]
