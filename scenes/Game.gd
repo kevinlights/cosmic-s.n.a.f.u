@@ -30,6 +30,7 @@ var shake_amount : float = 0.0
 func go_to_radar() -> void:
 	cockpit.hide()
 	radar.show()
+	MusicManager.change_music("steering")
 
 func go_to_energy_system() -> void:
 	cockpit.hide()
@@ -38,18 +39,22 @@ func go_to_energy_system() -> void:
 func go_to_radio() -> void:
 	cockpit.hide()
 	radio.show()
+	MusicManager.change_music("radar")
 
 func back_from_radar() -> void:
 	radar.hide()
 	cockpit.show()
+	MusicManager.change_music("main")
 
 func back_from_energy_system() -> void:
 	energy_system.hide()
 	cockpit.show()
+	MusicManager.change_music("main")
 
 func back_from_radio() -> void:
 	radio.hide()
 	cockpit.show()
+	MusicManager.change_music("main")
 
 func do_connections_overlap(battery_a : int, component_a : int, battery_b : int, component_b : int) -> bool:
 	# If the two batteries or the two components are the same, the connections cannot overlap
@@ -162,6 +167,7 @@ func start_game() -> void:
 		battery_drain_rates[i] = (randf() + 1.0) / 100.0
 
 func _ready() -> void:
+	# Set up the various nodes! Yes, this is a complete hodge-podge.
 	cockpit.connect("go_to_radar", self, "go_to_radar")
 	cockpit.connect("go_to_energy_system", self, "go_to_energy_system")
 	cockpit.connect("go_to_radio", self, "go_to_radio")
@@ -174,4 +180,6 @@ func _ready() -> void:
 	energy_system.game = self
 	radar.game = self
 	radio.game = self
+	# Game on!
 	start_game()
+	MusicManager.start_music()

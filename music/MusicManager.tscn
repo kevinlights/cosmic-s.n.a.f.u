@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://music/MusicManager.gd" type="Script" id=1]
 [ext_resource path="res://addons/audio_booth/source/music/Song.gd" type="Script" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://music/assets/main.ogg" type="AudioStream" id=5]
 [ext_resource path="res://music/assets/cooling.ogg" type="AudioStream" id=6]
 [ext_resource path="res://music/assets/radar.ogg" type="AudioStream" id=7]
-[ext_resource path="res://music/assets/cooling.wav" type="AudioStream" id=8]
 
 [node name="MusicManager" type="Node"]
 script = ExtResource( 1 )
@@ -57,39 +56,3 @@ beats = 4
 script = ExtResource( 4 )
 
 [node name="Cooling" type="AudioStreamPlayer" parent="MusicBooth/Cooling/TrackContainer"]
-stream = ExtResource( 8 )
-
-[node name="Buttons" type="Node2D" parent="."]
-
-[node name="Main" type="Button" parent="Buttons"]
-margin_left = 128.0
-margin_top = 192.0
-margin_right = 200.0
-margin_bottom = 256.0
-text = "Main"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Radar" type="Button" parent="Buttons"]
-margin_left = 256.0
-margin_top = 192.0
-margin_right = 328.0
-margin_bottom = 256.0
-text = "Radar"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Steering" type="Button" parent="Buttons"]
-margin_left = 384.0
-margin_top = 192.0
-margin_right = 456.0
-margin_bottom = 256.0
-text = "Steering"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-[connection signal="pressed" from="Buttons/Main" to="." method="_on_Main_pressed"]
-[connection signal="pressed" from="Buttons/Radar" to="." method="_on_Rader_pressed"]
-[connection signal="pressed" from="Buttons/Steering" to="." method="_on_Steering_pressed"]

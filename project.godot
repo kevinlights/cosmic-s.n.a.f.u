@@ -63,7 +63,12 @@ _global_script_class_icons={
 [application]
 
 config/name="GMTK Jam 2020"
+run/main_scene="res://scenes/TitleScreen.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+MusicManager="*res://music/MusicManager.tscn"
 
 [display]
 
@@ -72,10 +77,6 @@ window/size/height=360
 window/stretch/mode="viewport"
 window/stretch/aspect="keep"
 window/stretch/shrink=2.0
-
-[editor_plugins]
-
-enabled=PoolStringArray( "audio_booth" )
 
 [rendering]
 
