@@ -253,7 +253,7 @@ func ship_hit_by_asteroid() -> void:
 	MusicManager.increase_pitch()
 	MusicManager.set_drums(true)
 	if health <= 0:
-		GameState.game_over_reason = GameState.GameOverReason.SHIP_DESTROYED
+		GameState.game_over(GameState.GameOverReason.SHIP_DESTROYED)
 		MusicManager.stop_music_suddenly()
 		get_tree().change_scene("res://scenes/GameOver.tscn")
 
@@ -266,6 +266,7 @@ func fire_weapon(which_weapon : int) -> void:
 	audio_weapon_fire.play()
 	weapon_ready[which_weapon] = false
 	weapon_recharge_progress[which_weapon] = 0.0
+	GameState.missiles_fired += 1
 
 func missile_destroyed_asteroid() -> void:
 	audio_missile_hit_asteroid.play()
@@ -290,6 +291,7 @@ func _new_message_received(index : int) -> void:
 func response_sent(which_response : int) -> void:
 	cockpit.set_phone_active(false)
 	phone_system.evaluate_response(which_response)
+	GameState.messages_sent += 1
 
 func _too_many_wrong_answers():
 	GameState.game_over_reason = GameState.GameOverReason.TOO_MANY_WRONG_ANSWERS

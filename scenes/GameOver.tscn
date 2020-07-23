@@ -30,25 +30,24 @@ __meta__ = {
 }
 
 [node name="Label_GameOver" type="Label" parent="."]
-margin_top = 70.0
+margin_top = 40.0
 margin_right = 320.0
-margin_bottom = 90.0
-rect_min_size = Vector2( 320, 20 )
+margin_bottom = 51.0
+rect_min_size = Vector2( 320, 10 )
 custom_fonts/font = ExtResource( 2 )
 text = "GAME OVER"
 align = 1
-valign = 1
+valign = 2
 autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Label_Quip" type="Label" parent="."]
-margin_left = 20.0
-margin_top = 85.0
-margin_right = 300.0
-margin_bottom = 105.0
-rect_min_size = Vector2( 280, 20 )
+margin_top = 52.0
+margin_right = 320.0
+margin_bottom = 62.0
+rect_min_size = Vector2( 280, 10 )
 custom_fonts/font = ExtResource( 3 )
 text = "Ya goofed."
 align = 1
@@ -57,11 +56,95 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Grid_Stats" type="GridContainer" parent="."]
+margin_left = 48.0
+margin_top = 80.0
+margin_right = 212.0
+margin_bottom = 112.0
+columns = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label_Time_Label" type="Label" parent="Grid_Stats"]
+margin_right = 128.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+text = "Time Survived"
+align = 2
+
+[node name="Label_Time_Value" type="Label" parent="Grid_Stats"]
+margin_left = 132.0
+margin_right = 164.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 32, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "00:10"
+
+[node name="Label_Missiles_Label" type="Label" parent="Grid_Stats"]
+margin_top = 9.0
+margin_right = 128.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+text = "Missiles Fired"
+align = 2
+
+[node name="Label_Missiles_Value" type="Label" parent="Grid_Stats"]
+margin_left = 132.0
+margin_top = 9.0
+margin_right = 164.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 32, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "7"
+
+[node name="Label_Asteroids_Label" type="Label" parent="Grid_Stats"]
+margin_top = 18.0
+margin_right = 128.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+text = "Asteroids Destroyed"
+align = 2
+
+[node name="Label_Asteroids_Value" type="Label" parent="Grid_Stats"]
+margin_left = 132.0
+margin_top = 18.0
+margin_right = 164.0
+margin_bottom = 23.0
+rect_min_size = Vector2( 32, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "3"
+
+[node name="Label_Messages_Label" type="Label" parent="Grid_Stats"]
+margin_top = 27.0
+margin_right = 128.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 128, 0 )
+custom_fonts/font = ExtResource( 3 )
+custom_colors/font_color = Color( 0.701961, 0.701961, 0.701961, 1 )
+text = "Messages sent"
+align = 2
+
+[node name="Label_Messages_Value" type="Label" parent="Grid_Stats"]
+margin_left = 132.0
+margin_top = 27.0
+margin_right = 164.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 32, 0 )
+custom_fonts/font = ExtResource( 3 )
+text = "11"
+
 [node name="Button_Back" type="TextureButton" parent="."]
 margin_left = 128.0
-margin_top = 128.0
+margin_top = 134.0
 margin_right = 192.0
-margin_bottom = 144.0
+margin_bottom = 150.0
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 2 )
 texture_hover = SubResource( 3 )
