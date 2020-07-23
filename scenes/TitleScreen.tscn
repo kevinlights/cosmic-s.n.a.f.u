@@ -1,10 +1,43 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://sprites/backgrounds/logo.png" type="Texture" id=1]
 [ext_resource path="res://sprites/menu_buttons.png" type="Texture" id=2]
 [ext_resource path="res://scenes/TitleScreen.gd" type="Script" id=3]
 [ext_resource path="res://sprites/backgrounds/cockpit.png" type="Texture" id=4]
 [ext_resource path="res://sprites/backgrounds/starfield.png" type="Texture" id=5]
+[ext_resource path="res://sprites/backgrounds/logo_mask.png" type="Texture" id=7]
+
+[sub_resource type="Shader" id=10]
+code = "shader_type canvas_item;
+
+uniform sampler2D logo_mask;
+
+void fragment() {
+	float literally_the_number_one_point_zero = 1.0f;
+	float slow_time = TIME / 10.0f;
+	vec4 c_logo = texture(TEXTURE, UV);
+	float c_logo_mask = texture(logo_mask, UV).r;
+	float c_logo_offset = texture(logo_mask, UV).g;
+	
+	float line1_y = pow(modf(TIME * 0.25, literally_the_number_one_point_zero), 0.5);
+	float line2_y = pow(modf(TIME * 0.20, literally_the_number_one_point_zero), 1.55);
+	float line1_thickness = 0.1 + (sin(TIME * 2.0) * 0.05);
+	float line2_thickness = 0.025 + (sin(TIME * 1.0) * 0.025);
+	
+	COLOR.rgba = c_logo;
+	if (abs(UV.y + c_logo_offset - line1_y) < line1_thickness && c_logo_mask > 0.5f) {
+		COLOR.rgb += vec3(0.1, 0.1, 0.1);
+	}
+	else if (abs(UV.y + c_logo_offset - line2_y) < line2_thickness && c_logo_mask > 0.5f) {
+		COLOR.rgb += vec3(0.1, 0.1, 0.1);
+	}
+	
+}"
+custom_defines = ""
+
+[sub_resource type="ShaderMaterial" id=11]
+shader = SubResource( 10 )
+shader_param/logo_mask = ExtResource( 7 )
 
 [sub_resource type="AtlasTexture" id=1]
 atlas = ExtResource( 2 )
@@ -70,14 +103,19 @@ __meta__ = {
 }
 
 [node name="Logo" type="TextureRect" parent="."]
-margin_right = 320.0
-margin_bottom = 192.0
+modulate = Color( 1, 1, 1, 0 )
+material = SubResource( 11 )
+margin_left = 20.0
+margin_top = 10.0
+margin_right = 300.0
+margin_bottom = 150.0
 texture = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Buttons" type="HBoxContainer" parent="."]
+modulate = Color( 1, 1, 1, 0 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_top = 155.0

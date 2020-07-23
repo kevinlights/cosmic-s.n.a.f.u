@@ -30,4 +30,8 @@ func _on_Button_Quit_pressed():
 	get_tree().quit()
 
 func _ready() -> void:
+	yield(get_tree().create_timer(1.0), "timeout")
+	tween.interpolate_property(logo, "modulate", Color.transparent, Color.white, 1.0)
+	tween.interpolate_property(buttons, "modulate", Color.transparent, Color.white, 1.0)
+	tween.start()
 	MusicManager.play_menu_music()
