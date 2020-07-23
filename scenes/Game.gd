@@ -65,6 +65,7 @@ func go_to_energy_system() -> void:
 func go_to_radio() -> void:
 	cockpit.hide()
 	radio.show()
+	radio.set_active(true)
 	MusicManager.switch_to_track("radar")
 
 func go_to_phone() -> void:
@@ -86,6 +87,7 @@ func back_from_energy_system() -> void:
 func back_from_radio() -> void:
 	radio.hide()
 	cockpit.show()
+	radio.set_active(false)
 	MusicManager.switch_to_track("main")
 
 func back_from_phone() -> void:
