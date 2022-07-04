@@ -67,8 +67,8 @@ Code by John Gabriel (@JohnGabrielUK)
 Graphics by Jerico Landry (@D4yz_Ag0)
 Music by Maya Engel (@MayaComposer)
 
-Made in Godot Engine 3.2.2
-Made for GMTK Jam 2020"
+Made in Godot Engine 3.4.4
+Originally made for GMTK Jam 2020"
 align = 1
 valign = 1
 __meta__ = {
@@ -83,4 +83,5 @@ margin_bottom = 171.0
 texture_normal = SubResource( 1 )
 texture_pressed = SubResource( 2 )
 texture_hover = SubResource( 3 )
+
 [connection signal="pressed" from="Button_Back" to="." method="_on_Button_Back_pressed"]
