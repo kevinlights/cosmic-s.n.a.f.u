@@ -296,12 +296,12 @@ func response_sent(which_response : int) -> void:
 	GameState.messages_sent += 1
 
 func _too_many_wrong_answers():
-	GameState.game_over_reason = GameState.GameOverReason.TOO_MANY_WRONG_ANSWERS
+	GameState.game_over(GameState.GameOverReason.TOO_MANY_WRONG_ANSWERS)
 	MusicManager.stop_music_suddenly()
 	get_tree().change_scene("res://scenes/GameOver.tscn")
 
 func _message_response_timeout():
-	GameState.game_over_reason = GameState.GameOverReason.RESPONSE_TIMEOUT
+	GameState.game_over(GameState.GameOverReason.RESPONSE_TIMEOUT)
 	MusicManager.stop_music_suddenly()
 	get_tree().change_scene("res://scenes/GameOver.tscn")
 
