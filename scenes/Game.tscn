@@ -91,7 +91,6 @@ bus = "SFX"
 
 [node name="Audio_MissileHitAsteroid" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource( 12 )
-volume_db = 5.0
 bus = "SFX"
 
 [node name="Audio_ShieldHit" type="AudioStreamPlayer" parent="SFX"]
