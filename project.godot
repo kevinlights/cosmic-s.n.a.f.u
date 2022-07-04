@@ -29,6 +29,7 @@ _global_script_class_icons={
 config/name="Cosmic S.N.A.F.U."
 config/description="An entry to GMTK Jam 2020, made by John Gabriel, Jerico Landry and Maya Engel."
 run/main_scene="res://scenes/TitleScreen.tscn"
+boot_splash/image="res://loading.png"
 config/icon="res://icon.png"
 
 [autoload]

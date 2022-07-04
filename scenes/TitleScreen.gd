@@ -11,7 +11,7 @@ func _on_Button_Play_pressed():
 	if going_out:
 		return
 	going_out = true
-	tween.interpolate_property(logo, "rect_position", logo.rect_position, Vector2(0, -180), 0.5, Tween.TRANS_BACK, Tween.EASE_IN)
+	tween.interpolate_property(logo, "rect_position", logo.rect_position, Vector2(20, -180), 0.5, Tween.TRANS_BACK, Tween.EASE_IN)
 	tween.interpolate_property(buttons, "rect_position", buttons.rect_position, buttons.rect_position + Vector2(0, 32), 0.5, Tween.TRANS_SINE, Tween.EASE_OUT)
 	tween.interpolate_property(background, "modulate", background.modulate, Color.white, 0.5, Tween.TRANS_SINE, Tween.EASE_IN)
 	tween.start()

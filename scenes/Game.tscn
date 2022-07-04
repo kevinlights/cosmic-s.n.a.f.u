@@ -19,9 +19,7 @@
 [ext_resource path="res://sound/battery_drained.ogg" type="AudioStream" id=17]
 [ext_resource path="res://sound/shield_hit.ogg" type="AudioStream" id=18]
 
-[node name="Game" type="Node" groups=[
-"game",
-]]
+[node name="Game" type="Node" groups=["game"]]
 script = ExtResource( 1 )
 
 [node name="PhoneSystem" parent="." instance=ExtResource( 8 )]
@@ -114,6 +112,7 @@ bus = "SFX"
 stream = ExtResource( 13 )
 volume_db = -10.0
 bus = "SFX"
+
 [connection signal="new_message_received" from="PhoneSystem" to="." method="_new_message_received"]
 [connection signal="response_timeout" from="PhoneSystem" to="." method="_message_response_timeout"]
 [connection signal="too_many_wrong_answers" from="PhoneSystem" to="." method="_too_many_wrong_answers"]

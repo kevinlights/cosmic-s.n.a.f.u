@@ -4,7 +4,7 @@ const Signal : AudioStreamOGGVorbis = preload("res://data/signal.ogg")
 
 const COLOUR_HUD = Color("687f8a")
 const WAVEFORM_WIDTH : int = 240
-const WAVEFORM_INCR : int = 24
+const WAVEFORM_INCR : int = 3209
 const WAVEFORM_CHUNK : int = 80
 
 var signal_strength : float = 0.5

@@ -7,7 +7,7 @@
 [ext_resource path="res://sprites/backgrounds/starfield.png" type="Texture" id=5]
 [ext_resource path="res://sprites/backgrounds/logo_mask.png" type="Texture" id=7]
 
-[sub_resource type="Shader" id=10]
+[sub_resource type="Shader" id=1]
 code = "shader_type canvas_item;
 
 uniform sampler2D logo_mask;
@@ -33,45 +33,44 @@ void fragment() {
 	}
 	
 }"
-custom_defines = ""
 
-[sub_resource type="ShaderMaterial" id=11]
-shader = SubResource( 10 )
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
 shader_param/logo_mask = ExtResource( 7 )
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 16 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 0, 0, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=3]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 16 )
+region = Rect2( 0, 0, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=4]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 64, 16 )
+region = Rect2( 0, 0, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=5]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 16, 64, 16 )
+region = Rect2( 64, 0, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=6]
 atlas = ExtResource( 2 )
-region = Rect2( 64, 16, 64, 16 )
+region = Rect2( 0, 16, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=7]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 64, 16 )
+region = Rect2( 0, 16, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=8]
 atlas = ExtResource( 2 )
-region = Rect2( 0, 32, 64, 16 )
+region = Rect2( 64, 16, 64, 16 )
 
 [sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 64, 16 )
+
+[sub_resource type="AtlasTexture" id=10]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 32, 64, 16 )
+
+[sub_resource type="AtlasTexture" id=11]
 atlas = ExtResource( 2 )
 region = Rect2( 64, 32, 64, 16 )
 
@@ -81,9 +80,6 @@ anchor_bottom = 1.0
 margin_right = -320.0
 margin_bottom = -180.0
 script = ExtResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Starfield" type="TextureRect" parent="."]
 margin_right = 320.0
@@ -104,7 +100,7 @@ __meta__ = {
 
 [node name="Logo" type="TextureRect" parent="."]
 modulate = Color( 1, 1, 1, 0 )
-material = SubResource( 11 )
+material = SubResource( 2 )
 margin_left = 20.0
 margin_top = 10.0
 margin_right = 300.0
@@ -130,27 +126,28 @@ __meta__ = {
 margin_left = 60.0
 margin_right = 124.0
 margin_bottom = 16.0
-texture_normal = SubResource( 1 )
-texture_pressed = SubResource( 2 )
-texture_hover = SubResource( 3 )
+texture_normal = SubResource( 3 )
+texture_pressed = SubResource( 4 )
+texture_hover = SubResource( 5 )
 
 [node name="Button_Credits" type="TextureButton" parent="Buttons"]
 margin_left = 128.0
 margin_right = 192.0
 margin_bottom = 16.0
-texture_normal = SubResource( 4 )
-texture_pressed = SubResource( 5 )
-texture_hover = SubResource( 6 )
+texture_normal = SubResource( 6 )
+texture_pressed = SubResource( 7 )
+texture_hover = SubResource( 8 )
 
 [node name="Button_Quit" type="TextureButton" parent="Buttons"]
 margin_left = 196.0
 margin_right = 260.0
 margin_bottom = 16.0
-texture_normal = SubResource( 7 )
-texture_pressed = SubResource( 8 )
-texture_hover = SubResource( 9 )
+texture_normal = SubResource( 9 )
+texture_pressed = SubResource( 10 )
+texture_hover = SubResource( 11 )
 
 [node name="Tween" type="Tween" parent="."]
+
 [connection signal="pressed" from="Buttons/Button_Play" to="." method="_on_Button_Play_pressed"]
 [connection signal="pressed" from="Buttons/Button_Credits" to="." method="_on_Button_Credits_pressed"]
 [connection signal="pressed" from="Buttons/Button_Quit" to="." method="_on_Button_Quit_pressed"]
