@@ -33,7 +33,7 @@ func _ready() -> void:
 	var time_survived : int = int(floor(GameState.get_time_survived_msec() / 1000.0))
 	var time_minutes : int = int(floor(time_survived / 60.0))
 	var time_seconds : int = time_survived % 60
-	label_time_value.text = str("%d:%d" % [time_minutes, time_seconds])
+	label_time_value.text = str("%d:%02d" % [time_minutes, time_seconds])
 	label_missiles_value.text = str(GameState.missiles_fired)
 	label_asteroids_value.text = str(GameState.asteroids_destroyed)
 	label_messages_value.text = str(GameState.messages_sent)
